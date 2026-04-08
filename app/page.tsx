@@ -1,11 +1,11 @@
-import Toggle from "./components/Toggle";
+import Counter from "./components/Counter";
 import Header from "./components/Header";
 
 export default function Home() {
   return (
     <div>
       <Header siteName="My Website Builder" />
-      <Toggle />
+      <Counter />
     </div>
   );
 }
