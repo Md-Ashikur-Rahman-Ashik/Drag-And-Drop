@@ -13,13 +13,20 @@ export default function PageManager() {
     setNewPage("");
   };
 
+  const deletePage = (pageToDelete) => {
+    setPages(pages.filter((page) => page != pageToDelete));
+  };
+
   return (
     <div>
       <h2> Pages {pages.length}</h2>
 
       <ul>
         {pages.map((page) => (
-          <li key={page}>{page}</li>
+          <li key={page}>
+            {page}{" "}
+            <button onClick={() => deletePage(page)}>Delete Page</button>
+          </li>
         ))}
       </ul>
 
