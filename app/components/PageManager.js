@@ -56,13 +56,13 @@ export default function PageManager() {
         ))}
       </ul>
 
-      <div className="flex gap-2">
+      <div className="flex gap-1">
         <input
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addPage()}
           placeholder="New Page..."
-          className="flex-1 bg-gray-800 text-white text-sm px-3 py-2 rounded outline-none"
+          className="bg-gray-800 text-white text-sm px-2 py-2 rounded outline-none"
         />
 
         <button
