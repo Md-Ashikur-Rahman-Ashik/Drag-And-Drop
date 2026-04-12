@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Input from "../components/ui/Input";
 
 export default function PageManager() {
   const [pages, setPages] = useState([
@@ -57,12 +58,11 @@ export default function PageManager() {
       </ul>
 
       <div className="flex gap-1">
-        <input
+        <Input
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addPage()}
-          placeholder="New Page..."
-          className="bg-gray-800 text-white text-sm px-2 py-2 rounded outline-none"
+          placeholder={"New Page..."}
         />
 
         <button

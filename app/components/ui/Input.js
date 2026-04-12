@@ -2,6 +2,7 @@ export default function Input({
   label,
   value,
   onChange,
+  onKeyDown,
   placeholder,
   type = "text",
 }) {
@@ -17,6 +18,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        onKeyDown={onKeyDown}
         className="bg-gray-800 text-white text-sm px-3 py-2 rounded border border-transparent focus:border-blue-500 outline-none placeholder-gray-600 transition-colors duration-150"
       />
     </div>
