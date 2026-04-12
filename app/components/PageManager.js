@@ -33,8 +33,8 @@ export default function PageManager() {
   };
 
   return (
-    <div className="w-64 bg-gray-900 min-h-screen p-4">
-      <h2 className="text-white font-bold text-lg mb-6">Pages</h2>
+    <div className="w-64 bg-gray-900 min-h-screen py-4 px-1">
+      <h2 className="text-white font-bold text-lg mb-6 px-1">Pages</h2>
 
       <ul className="space-y-1 mb-6">
         {pages.map((page) => (
