@@ -34,9 +34,9 @@ export default function Navbar({ siteName = "Untitle Site" }) {
       </div>
 
       <div className="flex items-center gap-2">
-        <button className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded hover:bg-gray-800">
+        <Button variant="secondary" size="md">
           Preview
-        </button>
+        </Button>
         <Button variant="primary" size="md">
           Publish
         </Button>
