@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "./ui/Button";
 
 export default function Navbar({ siteName = "Untitle Site" }) {
   const [name, setName] = useState(siteName);
@@ -36,9 +37,9 @@ export default function Navbar({ siteName = "Untitle Site" }) {
         <button className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded hover:bg-gray-800">
           Preview
         </button>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded font-medium">
+        <Button variant="primary" size="md">
           Publish
-        </button>
+        </Button>
       </div>
     </div>
   );
