@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "./ui/Button";
 
 export default function Navbar({ siteName = "Untitle Site" }) {
@@ -17,7 +17,9 @@ export default function Navbar({ siteName = "Untitle Site" }) {
         {isEditing ? (
           <input
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
             onBlur={() => setIsEditing(false)}
             onKeyDown={(e) => e.key === "Enter" && setIsEditing(false)}
             autoFocus

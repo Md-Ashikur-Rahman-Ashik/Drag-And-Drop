@@ -2,7 +2,7 @@ interface ButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "ghost" | "danger";
   size?: "sm" | "md" | "lg";
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
