@@ -1,4 +1,10 @@
-export default function DashboardLayout({ children }) {
+import React from "react";
+
+interface DashboardProps {
+  children: React.ReactElement;
+}
+
+export default function DashboardLayout({ children }: DashboardProps) {
   return (
     <div className="flex min-h-screen">
       <div className="w-64 bg-gray-900 p-4">
