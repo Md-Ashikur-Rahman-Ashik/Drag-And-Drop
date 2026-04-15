@@ -25,7 +25,7 @@ export default function PageManager() {
     setNewTitle("");
   };
 
-  const deletePage = (id) => {
+  const deletePage = (id : Number) => {
     if (pages.length == 1) return;
 
     setPages(pages.filter((page) => page.id !== id));

@@ -1,3 +1,14 @@
+import React from "react"
+
+interface InputProps {
+  label? : string
+  value : string
+  onChange? : (e : React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown? : (e : React.KeyboardEvent<HTMLInputElement>) => void
+  placeholder : string
+  type? : string
+}
+
 export default function Input({
   label,
   value,
@@ -5,7 +16,7 @@ export default function Input({
   onKeyDown,
   placeholder,
   type = "text",
-}) {
+} : InputProps) {
   return (
     <div className="flex flex-col gap-1">
       {label && (
