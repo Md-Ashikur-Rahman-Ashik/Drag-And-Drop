@@ -5,7 +5,7 @@ interface InputProps {
   value : string
   onChange? : (e : React.ChangeEvent<HTMLInputElement>) => void
   onKeyDown? : (e : React.KeyboardEvent<HTMLInputElement>) => void
-  placeholder : string
+  placeholder? : string
   type? : string
 }
 
