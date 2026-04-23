@@ -1,5 +1,5 @@
 import { puckConfig } from "@/app/lib/puck-config";
-import { createSupabaseServer } from "@/app/lib/supabase-server";
+import { supabase } from "../../../lib/supabase";
 import { Render } from "@measured/puck";
 import "@measured/puck/dist/index.css";
 import { notFound } from "next/navigation";
@@ -13,7 +13,6 @@ interface RendererProps {
 
 export default async function PageRenderer({ params }: RendererProps) {
   const { siteSlug, pageSlug } = await params;
-  const supabase = await createSupabaseServer();
 
   const { data: site, error: siteError } = await supabase
     .from("sites")
