@@ -4,8 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const supabase = await createSupabaseServer();
   const { searchParams } = new URL(request.url);
-  const siteId = searchParams.get("siteId");
-  const slug = searchParams.get("slug");
+  const siteId = searchParams
+    .get("siteId")
+    ?.trim()
+    .replace(/[^a-zA-Z0-9-]/g, "");
+  const slug = searchParams.get("slug")?.trim();
 
   if (!siteId) {
     return NextResponse.json({ error: "siteId required" }, { status: 400 });
