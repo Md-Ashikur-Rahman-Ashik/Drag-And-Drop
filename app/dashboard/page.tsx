@@ -47,7 +47,7 @@ export default async function DashboardPage() {
             </p>
           </div>
           <Link
-            href="/builder/new"
+            href="/dashboard/new"
             className="bg-white text-black text-xs font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
           >
             New Site
