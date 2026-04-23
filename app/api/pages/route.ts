@@ -5,16 +5,23 @@ export async function GET(request: NextRequest) {
   const supabase = await createSupabaseServer();
   const { searchParams } = new URL(request.url);
   const siteId = searchParams.get("siteId");
+  const slug = searchParams.get("slug");
 
   if (!siteId) {
     return NextResponse.json({ error: "siteId required" }, { status: 400 });
   }
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("pages")
     .select("*")
     .eq("site_id", siteId)
     .order("created_at", { ascending: true });
+
+  if (slug) {
+    query = query.eq("slug", slug);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
