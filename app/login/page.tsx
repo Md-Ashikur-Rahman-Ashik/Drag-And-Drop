@@ -32,22 +32,22 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 w-full max-w-md">
-        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
-          <span className="text-white font-bold text-lg">B</span>
+    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+      <div className="w-full max-w-sm">
+        <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center mb-8">
+          <div className="w-3.5 h-3.5 bg-black rounded-sm" />
         </div>
 
-        <h1 className="text-white text-2xl font-bold mb-2">
-          {isSignUp ? "Create your account" : "Welcome back"}
+        <h1 className="text-white text-2xl font-semibold mb-1">
+          {isSignUp ? "Create account" : "Welcome back"}
         </h1>
-        <p className="text-gray-500 text-sm mb-8">
-          {isSignUp ? "Start building today" : "Sign in to your builder"}
+        <p className="text-[#666] text-sm mb-8">
+          {isSignUp ? "Start building today" : "Sign in to continue"}
         </p>
 
-        <div className="space-y-4">
+        <div className="space-y-3 mb-4">
           <div>
-            <label className="text-gray-400 text-xs font-medium block mb-2">
+            <label className="block text-[10px] font-medium text-[#555] uppercase tracking-widest mb-1.5">
               Email
             </label>
             <input
@@ -56,12 +56,12 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAuth()}
               placeholder="you@example.com"
-              className="w-full bg-gray-800 text-white px-4 py-3 rounded-lg border border-gray-700 focus:border-blue-500 outline-none text-sm placeholder-gray-600"
+              className="w-full bg-[#0a0a0a] border border-[#222] text-white text-sm px-3.5 py-2.5 rounded-lg outline-none placeholder-[#444] focus:border-[#444] transition-colors"
             />
           </div>
 
           <div>
-            <label className="text-gray-400 text-xs font-medium block mb-2">
+            <label className="block text-[10px] font-medium text-[#555] uppercase tracking-widest mb-1.5">
               Password
             </label>
             <input
@@ -70,34 +70,30 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAuth()}
               placeholder="••••••••"
-              className="w-full bg-gray-800 text-white px-4 py-3 rounded-lg border border-gray-700 focus:border-blue-500 outline-none text-sm placeholder-gray-600"
+              className="w-full bg-[#0a0a0a] border border-[#222] text-white text-sm px-3.5 py-2.5 rounded-lg outline-none placeholder-[#444] focus:border-[#444] transition-colors"
             />
           </div>
-
-          {error && (
-            <p className="text-red-400 text-sm bg-red-950 border border-red-900 px-4 py-3 rounded-lg">
-              {error}
-            </p>
-          )}
-
-          <button
-            onClick={handleAuth}
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-3 rounded-lg transition-all duration-150"
-          >
-            {loading
-              ? "Please wait..."
-              : isSignUp
-                ? "Create account"
-                : "Sign in"}
-          </button>
         </div>
 
-        <p className="text-gray-500 text-sm text-center mt-6">
+        {error && (
+          <p className="text-red-400 text-xs bg-red-950/50 border border-red-950/50 px-3.5 py-2.5 rounded-lg mb-4">
+            {error}
+          </p>
+        )}
+
+        <button
+          onClick={handleAuth}
+          disabled={loading}
+          className="w-full bg-white hover:bg-gray-100 disabled:opacity-40 text-black text-sm font-medium py-2.5 rounded-lg transition-colors mb-4"
+        >
+          {loading ? "Please wait..." : isSignUp ? "Create account" : "Sign in"}
+        </button>
+
+        <p className="text-center text-xs text-[#555]">
           {isSignUp ? "Already have an account?" : "Don't have an account?"}
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-blue-400 hover:text-blue-300 font-medium"
+            className="text-white hover:text-gray-300 transition-colors"
           >
             {isSignUp ? "Sign in" : "Sign up"}
           </button>
