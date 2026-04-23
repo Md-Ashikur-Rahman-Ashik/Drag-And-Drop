@@ -1,7 +1,9 @@
-import { supabase } from "@/lib/supabase";
+import { createSupabaseServer } from "../lib/supabase-server";
 import Link from "next/link";
 
 export default async function DashboardPage() {
+  const supabase = await createSupabaseServer()
+  
   const { data: sites, error } = await supabase
     .from("sites")
     .select("*")
@@ -30,7 +32,7 @@ export default async function DashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sites.map((site) => (
-          <Link key={site.id} href={`/builder?site=${site.id}`}>
+          <Link key={site.id} href={`/builder?siteId=${site.id}`}>
             <div className="bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-sm transition-all duration-150 cursor-pointer">
               <div className="w-10 h-10 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
                 <span className="text-blue-600 font-bold text-sm">
