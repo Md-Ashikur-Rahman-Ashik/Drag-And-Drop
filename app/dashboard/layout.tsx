@@ -22,6 +22,14 @@ export default function DashboardLayout({ children }: DashboardProps) {
           >
             Settings
           </a>
+          <form action="/api/auth/signout" method="POST">
+            <button
+              type="submit"
+              className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded hover:bg-gray-800"
+            >
+              Sign out
+            </button>
+          </form>
         </nav>
       </div>
 
