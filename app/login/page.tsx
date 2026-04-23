@@ -89,7 +89,7 @@ export default function LoginPage() {
           {loading ? "Please wait..." : isSignUp ? "Create account" : "Sign in"}
         </button>
 
-        <p className="text-center text-xs text-[#555]">
+        <p className="text-xs text-[#555] flex justify-center gap-2">
           {isSignUp ? "Already have an account?" : "Don't have an account?"}
           <button
             onClick={() => setIsSignUp(!isSignUp)}
