@@ -84,9 +84,23 @@ export default async function DashboardPage() {
                     {site.name}
                   </p>
                   <p className="text-[#444] text-xs">/{site.slug}</p>
+
+                  <div className="mt-4 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[#555] text-xs">Open Builder</span>
+                    <span className="text-[#555] text-xs">{"->"}</span>
+                  </div>
                 </div>
               </Link>
             ))}
+
+            <Link href={"/dashboard/new"}>
+              <div className="bg-[#0a0a0a] border border-dashed border-[#222] hover:border-[#444] rounded-xl p-5 transition-all duration-150 cursor-pointer flex flex-col items-center justify-center min-h-[120px] gap-2">
+                <div className="w-8 h-8 bg-[#111] border border-[#222] rounded-lg flex items-center justify-center">
+                  <span className="text-[#444] text-lg leading-none">+</span>
+                </div>
+                <p className="text-[#444] text-xs">New Site</p>
+              </div>
+            </Link>
           </div>
         )}
       </div>
