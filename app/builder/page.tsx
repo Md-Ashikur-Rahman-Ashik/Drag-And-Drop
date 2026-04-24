@@ -3,7 +3,9 @@
 import { Puck, Data } from "@measured/puck";
 import { puckConfig } from "../lib/puck-config";
 import "@measured/puck/dist/index.css";
+import "./puck-overrides.css"
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 interface BuilderPageProps {
   searchParams: Promise<{ siteId?: string; pageId?: string }>;
@@ -20,6 +22,7 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
   const [pageData, setPageData] = useState<Data>(emptyData);
   const [pageId, setPageId] = useState<string | null>(null);
   const [siteId, setSiteId] = useState<string | null>(null);
+  const [siteName, setSiteName] = useState("Untitled Site");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
