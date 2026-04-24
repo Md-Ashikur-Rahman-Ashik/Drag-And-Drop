@@ -1,139 +1,46 @@
 .Puck {
-  --puck-color-azure-01: #000000;
-  --puck-color-azure-02: #0a0a0a;
-  --puck-color-azure-03: #111111;
-  --puck-color-azure-04: #1a1a1a;
-  --puck-color-azure-05: #333333;
-  --puck-color-azure-06: #555555;
-  --puck-color-azure-07: #888888;
-  --puck-color-azure-08: #aaaaaa;
-  --puck-color-azure-09: #cccccc;
-  --puck-color-azure-10: #ffffff;
-  --puck-color-azure-11: #ffffff;
-  --puck-color-azure-12: #ffffff;
+  --puck-color-grey-01: #ffffff;
+  --puck-color-grey-02: #f9fafb;
+  --puck-color-grey-03: #f3f4f6;
+  --puck-color-grey-04: #e5e7eb;
+  --puck-color-grey-05: #d1d5db;
+  --puck-color-grey-06: #9ca3af;
+  --puck-color-grey-07: #6b7280;
+  --puck-color-grey-08: #4b5563;
+  --puck-color-grey-09: #374151;
+  --puck-color-grey-10: #1f2937;
+  --puck-color-grey-11: #111827;
+  --puck-color-grey-12: #030712;
+  --puck-color-azure-01: #eff6ff;
+  --puck-color-azure-02: #dbeafe;
+  --puck-color-azure-03: #bfdbfe;
+  --puck-color-azure-04: #93c5fd;
+  --puck-color-azure-05: #60a5fa;
+  --puck-color-azure-06: #3b82f6;
+  --puck-color-azure-07: #2563eb;
+  --puck-color-azure-08: #1d4ed8;
+  --puck-color-azure-09: #1e40af;
+  --puck-color-azure-10: #1e3a8a;
+  --puck-color-azure-11: #1e3a8a;
+  --puck-color-azure-12: #172554;
 }
 
-.Puck-header {
-  background: #000 !important;
-  border-bottom: 0.5px solid #1a1a1a !important;
-  height: 44px !important;
-  padding: 0 12px !important;
+[class*="PuckPreview"],
+[class*="Preview"] {
+  background: #f3f4f6 !important;
 }
 
-.Puck-leftSideBar {
-  background: #000 !important;
-  border-right: 0.5px solid #1a1a1a !important;
-  width: 220px !important;
+.Puck ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
 }
-
-.Puck-rightSideBar {
-  background: #000 !important;
-  border-left: 0.5px solid #1a1a1a !important;
-  width: 220px !important;
+.Puck ::-webkit-scrollbar-track {
+  background: #f9fafb;
 }
-
-.Puck-frame {
-  background: #111 !important;
+.Puck ::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
 }
-
-.ComponentList-item {
-  background: #0a0a0a !important;
-  border: 0.5px solid #1a1a1a !important;
-  border-radius: 6px !important;
-  color: #666 !important;
-  font-size: 12px !important;
-  transition:
-    border-color 0.15s,
-    color 0.15s !important;
-}
-
-.ComponentList-item:hover {
-  border-color: #333 !important;
-  color: #fff !important;
-  background: #111 !important;
-}
-
-.SidebarSection {
-  border-bottom: 0.5px solid #1a1a1a !important;
-}
-
-.SidebarSection-title {
-  color: #444 !important;
-  font-size: 10px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-}
-
-.Input input,
-.Input select,
-.Input textarea {
-  background: #0a0a0a !important;
-  border: 0.5px solid #1a1a1a !important;
-  color: #fff !important;
-  border-radius: 6px !important;
-  font-size: 12px !important;
-}
-
-.Input input:focus,
-.Input select:focus,
-.Input textarea:focus {
-  border-color: #444 !important;
-  outline: none !important;
-}
-
-.Input label {
-  color: #555 !important;
-  font-size: 10px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-}
-
-.Puck-headerActions button[type="submit"],
-button.Puck-publishButton {
-  background: #fff !important;
-  color: #000 !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  padding: 6px 16px !important;
-}
-
-.LayerTree-item {
-  color: #555 !important;
-  font-size: 12px !important;
-}
-
-.LayerTree-item--selected {
-  color: #fff !important;
-  background: #111 !important;
-}
-
-.PuckPreview {
-  background: #111 !important;
-}
-
-.Puck-droppable--isActive {
-  outline: 1px solid #333 !important;
-}
-
-.Puck-droppable--isSelected {
-  outline: 1px solid #fff !important;
-}
-
-.Puck-leftSideBar ::-webkit-scrollbar,
-.Puck-rightSideBar ::-webkit-scrollbar {
-  width: 3px;
-}
-
-.Puck-leftSideBar ::-webkit-scrollbar-track,
-.Puck-rightSideBar ::-webkit-scrollbar-track {
-  background: #000;
-}
-
-.Puck-leftSideBar ::-webkit-scrollbar-thumb,
-.Puck-rightSideBar ::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 3px;
+.Puck ::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
 }
