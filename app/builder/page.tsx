@@ -132,22 +132,25 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
         onPublish={handlePublish}
         overrides={{
           header: ({ actions }) => (
-            <div className="h-11 bg-black border-b border-[#1a1a1a] flex items-center justify-between px-3">
+            <div className="h-11 bg-white border-b border-gray-100 flex items-center justify-between px-3">
               <div className="flex items-center gap-3">
                 <Link
-                  href={"/dashboard"}
-                  className="w-6 h-6 bg-white rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
+                  href="/dashboard"
+                  className="w-6 h-6 bg-brand-600 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
                 >
-                  <div className="w-3 h-3 bg-black rounded-sm" />
+                  <div className="w-3 h-3 bg-white rounded-sm" />
                 </Link>
-
-                <div className="w-px h-4 bg-[#1a1a1a]" />
-                <span className="text-white text-sm font-medium">
+                <div className="w-px h-4 bg-gray-100" />
+                <span className="text-gray-900 text-sm font-medium">
                   {siteName}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                {saved && <span className="text-[#3b6d11] text-xs">Saved</span>}
+                {saved && (
+                  <span className="text-green-600 text-xs bg-green-50 border border-green-100 px-2.5 py-1 rounded-md">
+                    Saved
+                  </span>
+                )}
                 {actions}
               </div>
             </div>
