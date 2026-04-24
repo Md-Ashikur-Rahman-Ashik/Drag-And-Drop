@@ -1,31 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import Input from "../components/ui/Input";
+
+interface Page {
+  id: number;
+  title: string;
+}
 
 export default function PageManager() {
-  const [pages, setPages] = useState([
+  const [pages, setPages] = useState<Page[]>([
     { id: 1, title: "Home" },
     { id: 2, title: "About" },
-    { id: 3, title: "Contact" },
   ]);
 
   const [selectedId, setSelectedId] = useState(1);
   const [newTitle, setNewTitle] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
 
   const addPage = () => {
     if (newTitle.trim() === "") return;
 
-    const newPage = {
-      id: Date.now(),
-      title: newTitle.trim(),
-    };
+    setPages([...pages, { id: Date.now(), title: newTitle.trim() }]);
 
-    setPages([...pages, newPage]);
     setNewTitle("");
+    setIsAdding(false);
   };
 
-  const deletePage = (id : Number) => {
+  const deletePage = (id: number) => {
     if (pages.length == 1) return;
 
     setPages(pages.filter((page) => page.id !== id));
@@ -33,44 +34,93 @@ export default function PageManager() {
   };
 
   return (
-    <div className="w-64 bg-gray-900 min-h-screen py-4 px-1">
-      <h2 className="text-white font-bold text-lg mb-6 px-1">Pages</h2>
-
-      <ul className="space-y-1 mb-6">
-        {pages.map((page) => (
-          <li
-            key={page.id}
-            onClick={() => setSelectedId(page.id)}
-            className={`px-3 flex justify-between py-2 rounded cursor-pointer text-sm font-medium group ${selectedId === page.id ? "bg-blue-600 text-white" : "text-gray-400 hover:bg-gray-800 hover:text-white"}`}
+    <div className="w-52 bg-black border-r border-[#1a1a1a] flex felx-col h-full shrink-0">
+      <div className="p-3 border-b border-[#1a1a1a]">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] font-medium text-[#444] uppercase tracking-widest">
+            Pages
+          </span>
+          <button
+            onClick={() => setIsAdding(true)}
+            className="text-[#444] hover:text-white transition-colors text-sm leading-none"
           >
-            <span>{page.title}</span>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                deletePage(page.id);
-              }}
-              className="opacity-0 group-hover:opacity-100 text-xs hover:text-red-400 transition-opacity"
+            +
+          </button>
+        </div>
+
+        <ul className="space-y-0.5">
+          {pages.map((page) => (
+            <li
+              key={page.id}
+              onClick={() => setSelectedId(page.id)}
+              className={`flex items-center justify-between px-2.5 py-1.5 rounded-md cursor-pointer text-xs group transition-colors ${selectedId === page.id ? "bg-[#111] text-white" : "text-[#555] hover:text-white hover:bg-[#0a0a0a]"}`}
             >
-              X
+              <div className="flex items-center gap-2">
+                <div
+                  className={`w-1 h-1 rounded-full ${selectedId === page.id ? "bg-white" : "bg-[#333]"}`}
+                />
+                <span>{page.title}</span>
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deletePage(page.id);
+                }}
+                className="opacity-0 group-hover:opacity-100 text-[#555] hover:text-red-400 transition-all text-xs"
+              >
+                X
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {isAdding && (
+          <div className="mt-2 flex gap-1.5">
+            <input
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") addPage();
+                if (e.key === "Escape") setIsAdding(false);
+              }}
+              placeholder={"Page name"}
+              autoFocus
+              className="flex-1 bg-[#0a0a0a] border border-[#333] text-white text-xs px-2 py-1.5 rounded-md outline-none placeholder-[#444] focus:border-[#555]"
+            />
+            <button
+              onClick={addPage}
+              className="bg-white text-black text-xs px-2 py-1.5 rounded-md font-medium hover:bg-gray-100 transition-colors"
+            >
+              Add
             </button>
-          </li>
-        ))}
-      </ul>
+          </div>
+        )}
+      </div>
 
-      <div className="flex gap-1">
-        <Input
-          value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && addPage()}
-          placeholder={"New Page..."}
-        />
-
-        <button
-          onClick={addPage}
-          className="bg-blue-600 text-white px-3 py-2 rounded text-sm hover:bg-blue-700"
-        >
-          Add
-        </button>
+      <div className="p-3 flex-1 overflow-y-auto">
+        <span className="text-[10px] font-medium text-[#444] uppercase tracking-widest block mb-2">
+          Components
+        </span>
+        <div className="space-y-1">
+          {[
+            "Hero Section",
+            "Text Block",
+            "Card",
+            "Navbar",
+            "Footer",
+            "Gallery",
+          ].map((component) => (
+            <div
+              key={component}
+              className="flex items-center gap-2.5 px-2.5 py-2 rounded-md border border-[#111] bg-[#0a0a0a] hover:border[#333] hover:bg-[#111] transition-all cursor-grab group"
+            >
+              <div className="w-3 h-3 border border-[#333] group-hover:border[#555] rounded-sm shrink-0 transition-colors" />
+              <span className="text-xs text-[#555] group-hover:text-white transition-colors">
+                {component}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
