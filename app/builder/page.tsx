@@ -3,7 +3,7 @@
 import { Puck, Data } from "@measured/puck";
 import { puckConfig } from "../lib/puck-config";
 import "@measured/puck/dist/index.css";
-import "./puck-overrides.css"
+import "./puck-overrides.css";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -30,13 +30,21 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
       const params = await searchParams;
       setSiteId(params.siteId || null);
 
+      if (params.siteId) {
+        const siteRes = await fetch(`/api/sites/${params.siteId}`);
+        if (siteRes.ok) {
+          const site = await siteRes.json();
+          setSiteName(site.name);
+        }
+      }
+
       if (params.pageId) {
         setPageId(params.pageId);
 
         const response = await fetch(`/api/pages/${params.pageId}`);
         if (response.ok) {
           const page = await response.json();
-          if (page.content && page.content.content) {
+          if (page.content?.content) {
             setPageData(page.content as Data);
           }
         }
@@ -51,7 +59,7 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
             const page = pages[0];
             setPageId(page.id);
 
-            if (page.content && page.content.content) {
+            if (page.content?.content) {
               setPageData(page.content as Data);
             }
           }
@@ -102,23 +110,50 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gray-950">
+      <div className="h-screen flex items-center justify-center bg-black">
         <div className="text-center">
-          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-400 text-sm">Loading Editor...</p>
+          <div className="w-6 h-6 border border-[#333] border-t-white rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-[#555] text-xs">Loading Editor...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen relative">
+    <div className="h-screen overflow-hidden">
       {saved && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-          Page saved successfully
+        <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-[#173404] border border-[#27500a] text-[#3b6d11] px-4 py-2 rounded-full text-xs font-medium">
+          Saved successfully
         </div>
       )}
-      <Puck config={puckConfig} data={pageData} onPublish={handlePublish} />
+      <Puck
+        config={puckConfig}
+        data={pageData}
+        onPublish={handlePublish}
+        overrides={{
+          header: ({ actions }) => (
+            <div className="h-11 bg-black border-b border-[#1a1a1a] flex items-center justify-between px-3">
+              <div className="flex items-center gap-3">
+                <Link
+                  href={"/dashboard"}
+                  className="w-6 h-6 bg-white rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
+                >
+                  <div className="w-3 h-3 bg-black rounded-sm" />
+                </Link>
+
+                <div className="w-px h-4 bg-[#1a1a1a]" />
+                <span className="text-white text-sm font-medium">
+                  {siteName}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                {saved && <span className="text-[#3b6d11] text-xs">Saved</span>}
+                {actions}
+              </div>
+            </div>
+          ),
+        }}
+      />
     </div>
   );
 }
