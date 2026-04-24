@@ -23,41 +23,27 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen">
       <nav className="border-b border-[#1a1a1a] px-6 h-12 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-5 h-5 bg-white rounded flex items-center justify-center">
-            <div className="w-2.5 h-2.5 bg-black rounded-sm" />
+          <div className="w-5 h-5 bg-black rounded flex items-center justify-center">
+            <div className="w-2.5 h-2.5 rounded-sm" />
           </div>
-          <span className="text-white text-sm font-medium">Builder</span>
+          <span className="text-sm font-medium">Builder</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-[#555] text-xs">{user?.email}</span>
-          <form action="/api/auth/signout" method="POST">
-            <button
-              type="submit"
-              className="text-[#555] hover:text-white text-xs transition-colors"
-            >
-              Sign out
-            </button>
-          </form>
+        <div>
+          <span className="text-[#555] text-xs font-medium">{user?.email}</span>
         </div>
       </nav>
 
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-2xl font-semibold text-white mb-1">My Sites</h1>
-            <p className="text-sm text-[#555]">
+            <h1 className="text-2xl font-semibold mb-1">My Sites</h1>
+            <p className="text-sm text-[#555] font-medium">
               {sites.length} site{sites.length !== 1 ? "s" : ""}
             </p>
           </div>
-          <Link
-            href="/dashboard/new"
-            className="bg-white text-black text-xs font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            New Site
-          </Link>
         </div>
 
         {sites.length === 0 ? (
@@ -82,14 +68,14 @@ export default async function DashboardPage() {
               <Link key={site.id} href={`/builder?siteId=${site.id}`}>
                 <div className="group bg-[#0a0a0a] border border[#1a1a1a] hover:border-[#333] rounded-xl p-5 transition-all duration-150 cursor-pointer">
                   <div className="w-8 h-8 bg-[#111] border border-[#222] rounded-lg mb-4 flex items-center justify-center">
-                    <span className="text-[#666] text-xs font-medium">
+                    <span className="text-white text-xs font-medium">
                       {site.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   <p className="text-white text-sm font-medium mb-1 group-hover:text-white">
                     {site.name}
                   </p>
-                  <p className="text-[#444] text-xs">/{site.slug}</p>
+                  <p className="text-white text-xs">/{site.slug}</p>
 
                   <div className="mt-4 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-[#555] text-xs">Open Builder</span>
