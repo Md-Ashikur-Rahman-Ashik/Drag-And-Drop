@@ -110,9 +110,9 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-black">
+      <div className="h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-6 h-6 border border-[#333] border-t-white rounded-full animate-spin mx-auto mb-3" />
+          <div className="w-6 h-6 border border-[#333] rounded-full animate-spin mx-auto mb-3" />
           <p className="text-[#555] text-xs">Loading Editor...</p>
         </div>
       </div>
@@ -136,12 +136,12 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="w-6 h-6 bg-brand-600 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
+                  className="w-6 h-6 bg-brand-600 border-2 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
                 >
                   <div className="w-3 h-3 bg-white rounded-sm" />
                 </Link>
                 <div className="w-px h-4 bg-gray-100" />
-                <span className="text-gray-900 text-sm font-medium">
+                <span className="text-sm font-medium">
                   {siteName}
                 </span>
               </div>
