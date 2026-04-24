@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: DashboardProps) {
         <h2 className="text-white font-bold mb-4">Dashboard</h2>
         <nav className="space-y-1">
           <a
-            href="/dashboard"
+            href="/"
             className="block text-white px-3 py-2 rounded hover:bg-gray-800 text-sm"
           >
             Home
