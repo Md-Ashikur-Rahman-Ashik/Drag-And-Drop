@@ -1,7 +1,11 @@
 export default function PropertiesPanel() {
   return (
-    <div className="w-64 bg-gray-900 border-l border-gray-800 h-full p-4 overflow-y-auto">
-      <h3 className="text-white font-semibold text-sm mb-4">Properties</h3>
+    <div className="w-56 bg-black border-l border-[#1a1a1a] flex flex-col h-full shrink-0">
+      <div className="px-3 py-2.5 border-b border-[#1a1a1a]">
+        <span className="text-[10px] font-medium text-[#444] uppercase tracking-widest">
+          Properties
+        </span>
+      </div>
 
       <div className="mb-6">
         <p className="text-gray-500 text-xs font-medium uppercase tracking wider mb-3">
