@@ -1,6 +1,12 @@
 import { createSupabaseServer } from "../lib/supabase-server";
 import Link from "next/link";
 
+interface SiteProps {
+  name: string;
+  id: number;
+  slug: string;
+}
+
 export default async function DashboardPage() {
   const supabase = await createSupabaseServer();
 
@@ -72,7 +78,7 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {sites.map((site) => (
+            {sites.map((site: SiteProps) => (
               <Link key={site.id} href={`/builder?siteId=${site.id}`}>
                 <div className="group bg-[#0a0a0a] border border[#1a1a1a] hover:border-[#333] rounded-xl p-5 transition-all duration-150 cursor-pointer">
                   <div className="w-8 h-8 bg-[#111] border border-[#222] rounded-lg mb-4 flex items-center justify-center">
