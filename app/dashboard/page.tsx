@@ -45,12 +45,6 @@ export default async function DashboardPage() {
               {sites.length} site{sites.length !== 1 ? "s" : ""}
             </p>
           </div>
-          <Link
-            href="/dashboard/new"
-            className="bg-brand-600 hover:bg-brand-700 text-xs font-medium px-4 py-2 rounded-lg transition-colors"
-          >
-            New site
-          </Link>
         </div>
 
         {sites.length === 0 ? (
@@ -90,7 +84,7 @@ export default async function DashboardPage() {
             ))}
 
             <Link href="/dashboard/new">
-              <div className="bg-white border border-dashed border-gray-200 hover:border-brand-300 rounded-xl p-5 transition-all duration-150 cursor-pointer flex flex-col items-center justify-center min-h-[130px] gap-2">
+              <div className="bg-white border border-dashed hover:border-brand-300 rounded-xl p-5 transition-all duration-150 cursor-pointer flex flex-col items-center justify-center min-h-[130px] gap-2">
                 <div className="w-8 h-8 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center">
                   <span className="text-lg">+</span>
                 </div>
