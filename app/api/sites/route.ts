@@ -1,5 +1,5 @@
-import { supabase } from "@/lib/supabase";
-import { NextResponse } from "next/server";
+import { supabase } from "../../lib/supabase";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   const { data, error } = await supabase
@@ -14,7 +14,7 @@ export async function GET() {
   return NextResponse.json(data);
 }
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   const body = await request.json();
   const { name, slug } = body;
 
