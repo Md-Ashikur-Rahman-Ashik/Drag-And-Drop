@@ -122,7 +122,7 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
   return (
     <div className="h-screen overflow-hidden">
       {saved && (
-        <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-[#173404] border border-[#27500a] text-[#3b6d11] px-4 py-2 rounded-full text-xs font-medium">
+        <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-black border border-[#27500a] text-white px-4 py-2 rounded-full text-xs font-medium">
           Saved successfully
         </div>
       )}
