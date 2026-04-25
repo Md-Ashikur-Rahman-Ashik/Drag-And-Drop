@@ -1,46 +1,40 @@
-.Puck {
-  --puck-color-grey-01: #ffffff;
-  --puck-color-grey-02: #f9fafb;
-  --puck-color-grey-03: #f3f4f6;
-  --puck-color-grey-04: #e5e7eb;
-  --puck-color-grey-05: #d1d5db;
-  --puck-color-grey-06: #9ca3af;
-  --puck-color-grey-07: #6b7280;
-  --puck-color-grey-08: #4b5563;
-  --puck-color-grey-09: #374151;
-  --puck-color-grey-10: #1f2937;
-  --puck-color-grey-11: #111827;
-  --puck-color-grey-12: #030712;
-  --puck-color-azure-01: #eff6ff;
-  --puck-color-azure-02: #dbeafe;
-  --puck-color-azure-03: #bfdbfe;
-  --puck-color-azure-04: #93c5fd;
-  --puck-color-azure-05: #60a5fa;
-  --puck-color-azure-06: #3b82f6;
-  --puck-color-azure-07: #2563eb;
-  --puck-color-azure-08: #1d4ed8;
-  --puck-color-azure-09: #1e40af;
-  --puck-color-azure-10: #1e3a8a;
-  --puck-color-azure-11: #1e3a8a;
-  --puck-color-azure-12: #172554;
+.Puck > * { background: #fff !important; }
+
+[class^="SideBar"],
+[class*="SideBar"],
+[class*="sidebar"],
+[class*="Sidebar"],
+[class*="LeftSidebar"],
+[class*="RightSidebar"] {
+  background: #fff !important;
+  border-color: #f0f0f0 !important;
+  color: #111 !important;
 }
 
-[class*="PuckPreview"],
-[class*="Preview"] {
+[class*="Layer"],
+[class*="layer"],
+[class*="Outline"],
+[class*="outline"] {
+  background: #fff !important;
+  color: #374151 !important;
+}
+
+[class*="ComponentList"],
+[class*="componentList"] {
+  background: #fff !important;
+}
+
+[class*="ComponentList"] li,
+[class*="ComponentList"] button {
+  background: #fff !important;
+  border: 1px solid #e5e7eb !important;
+  color: #374151 !important;
+  border-radius: 6px !important;
+}
+
+[class*="Preview"],
+[class*="preview"],
+[class*="Frame"],
+[class*="frame"] {
   background: #f3f4f6 !important;
-}
-
-.Puck ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-.Puck ::-webkit-scrollbar-track {
-  background: #f9fafb;
-}
-.Puck ::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
-  border-radius: 4px;
-}
-.Puck ::-webkit-scrollbar-thumb:hover {
-  background: #d1d5db;
 }
