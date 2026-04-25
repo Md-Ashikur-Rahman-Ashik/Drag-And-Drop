@@ -1,3 +1,4 @@
+import SignOutButton from "../components/SignOutButton";
 import { createSupabaseServer } from "../lib/supabase-server";
 import Link from "next/link";
 
@@ -27,20 +28,14 @@ export default async function DashboardPage() {
         </div>
         <div className="flex items-center gap-4">
           <span className="text-xs">{user?.email}</span>
-          <form action="/api/auth/signout" method="POST">
-            <button className="hover:text-gray-600 text-xs border border-gray-200 px-3 py-1.5 rounded-md transition-colors">
-              Sign out
-            </button>
-          </form>
+          <SignOutButton />
         </div>
       </nav>
 
       <div className="max-w-5xl mx-auto px-6 py-10">
         <div className="flex items-end justify-between mb-7">
           <div>
-            <h1 className="text-xl font-semibold mb-0.5">
-              My Sites
-            </h1>
+            <h1 className="text-xl font-semibold mb-0.5">My Sites</h1>
             <p className="text-sm">
               {sites.length} site{sites.length !== 1 ? "s" : ""}
             </p>
@@ -52,9 +47,7 @@ export default async function DashboardPage() {
             <div className="w-10 h-10 bg-gray-50 border border-gray-200 rounded-lg mx-auto mb-4 flex items-center justify-center">
               <span className="text-xl">+</span>
             </div>
-            <p className="text-sm font-medium mb-1">
-              No sites yet
-            </p>
+            <p className="text-sm font-medium mb-1">No sites yet</p>
             <p className="text-xs mb-6">
               Create your first site to get started
             </p>
@@ -70,9 +63,7 @@ export default async function DashboardPage() {
             {sites.map((site) => (
               <Link key={site.id} href={`/builder?siteId=${site.id}`}>
                 <div className="group bg-white border border-gray-200 hover:border-brand-300 hover:shadow-sm rounded-xl p-5 transition-all duration-150 cursor-pointer">
-                  <p className="text-sm font-medium mb-1">
-                    {site.name}
-                  </p>
+                  <p className="text-sm font-medium mb-1">{site.name}</p>
                   <p className="text-xs">/{site.slug}</p>
                   <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-brand-600 text-xs font-medium">
