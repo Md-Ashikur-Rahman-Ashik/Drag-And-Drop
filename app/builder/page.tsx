@@ -135,7 +135,7 @@ export default function BuilderPage() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="w-6 h-6 bg-brand-600 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
+                  className="w-6 h-6 bg-brand-600 border-2 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
                 >
                   <div className="w-3 h-3 bg-white rounded-sm" />
                 </Link>
