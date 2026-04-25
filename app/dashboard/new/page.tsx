@@ -57,23 +57,23 @@ export default function NewSitePage() {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-6">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm border-2 p-6 rounded-lg">
         <Link
           href="/dashboard"
-          className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 text-xs transition-colors mb-8"
+          className="flex items-center gap-1.5 text-xs mb-8"
         >
           <span>←</span>
           <span>Back to dashboard</span>
         </Link>
 
-        <h1 className="text-xl font-semibold text-gray-900 mb-1">New site</h1>
-        <p className="text-sm text-gray-400 mb-7">
+        <h1 className="text-xl font-semibold mb-1">New site</h1>
+        <p className="text-sm mb-7">
           Give your site a name to get started.
         </p>
 
         <div className="space-y-3 mb-4">
           <div>
-            <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5">
               Site name
             </label>
             <input
@@ -83,21 +83,21 @@ export default function NewSitePage() {
               onKeyDown={(e) => e.key === "Enter" && handleCreate()}
               placeholder="My Portfolio"
               autoFocus
-              className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm px-3.5 py-2.5 rounded-lg outline-none placeholder-gray-300 focus:border-brand-500 focus:bg-white transition-colors"
+              className="w-full bg-gray-50 border border-gray-200 text-sm px-3.5 py-2.5 rounded-lg outline-none focus:border-brand-500 focus:bg-white transition-colors"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-medium uppercase tracking-wider mb-1.5">
               URL
             </label>
             <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 focus-within:border-brand-500 focus-within:bg-white transition-colors">
-              <span className="text-gray-300 text-sm mr-1">/</span>
+              <span className="text-sm mr-1">/</span>
               <input
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
                 placeholder="my-portfolio"
-                className="flex-1 bg-transparent text-gray-900 text-sm outline-none placeholder-gray-300"
+                className="flex-1 bg-transparent text-sm outline-none"
               />
             </div>
           </div>
@@ -112,9 +112,9 @@ export default function NewSitePage() {
         <button
           onClick={handleCreate}
           disabled={loading || !name || !slug}
-          className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-white text-sm font-medium py-2.5 rounded-lg transition-colors"
+          className="w-full disabled:opacity-40 text-sm font-medium py-2.5 rounded-lg border-2"
         >
-          {loading ? "Creating..." : "Create site →"}
+          {loading ? "Creating..." : "Create site"}
         </button>
       </div>
     </div>
