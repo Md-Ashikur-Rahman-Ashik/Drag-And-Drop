@@ -5,18 +5,16 @@ import { puckConfig } from "../lib/puck-config";
 import "@measured/puck/dist/index.css";
 import "./puck-overrides.css";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-
-interface BuilderPageProps {
-  searchParams: Promise<{ siteId?: string; pageId?: string }>;
-}
 
 const emptyData: Data = {
   content: [],
   root: {},
 };
 
-export default function BuilderPage({ searchParams }: BuilderPageProps) {
+export default function BuilderPage() {
+  const searchParams = useSearchParams();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [pageData, setPageData] = useState<Data>(emptyData);
@@ -27,38 +25,39 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
 
   useEffect(() => {
     const loadPage = async () => {
-      const params = await searchParams;
-      setSiteId(params.siteId || null);
+      const paramSiteId = searchParams.get("siteId");
+      const paramPageId = searchParams.get("pageId");
 
-      if (params.siteId) {
-        const siteRes = await fetch(`/api/sites/${params.siteId}`);
+      console.log("Params — siteId:", paramSiteId, "pageId:", paramPageId);
+
+      setSiteId(paramSiteId);
+
+      if (paramSiteId) {
+        const siteRes = await fetch(`/api/sites/${paramSiteId}`);
         if (siteRes.ok) {
           const site = await siteRes.json();
           setSiteName(site.name);
         }
       }
 
-      if (params.pageId) {
-        setPageId(params.pageId);
-
-        const response = await fetch(`/api/pages/${params.pageId}`);
+      if (paramPageId) {
+        setPageId(paramPageId);
+        const response = await fetch(`/api/pages/${paramPageId}`);
         if (response.ok) {
           const page = await response.json();
           if (page.content?.content) {
             setPageData(page.content as Data);
           }
         }
-      } else if (params.siteId) {
+      } else if (paramSiteId) {
         const response = await fetch(
-          `/api/pages?siteId=${params.siteId}?&slug=home`,
+          `/api/pages?siteId=${paramSiteId}&slug=home`,
         );
-
         if (response.ok) {
           const pages = await response.json();
           if (pages.length > 0) {
             const page = pages[0];
             setPageId(page.id);
-
             if (page.content?.content) {
               setPageData(page.content as Data);
             }
@@ -70,9 +69,10 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
     };
 
     loadPage();
-  }, []);
+  }, [searchParams]);
 
   const handlePublish = async (data: Data) => {
+    console.log("Publishing — siteId:", siteId, "pageId:", pageId);
     setSaving(true);
     setSaved(false);
 
@@ -94,7 +94,6 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
             content: data,
           }),
         });
-
         const newPage = await response.json();
         setPageId(newPage.id);
       }
@@ -110,10 +109,10 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <div className="w-6 h-6 border border-[#333] rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-[#555] text-xs">Loading Editor...</p>
+          <div className="w-6 h-6 border border-gray-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-gray-400 text-xs">Loading editor...</p>
         </div>
       </div>
     );
@@ -122,7 +121,7 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
   return (
     <div className="h-screen overflow-hidden">
       {saved && (
-        <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-black border border-[#27500a] text-white px-4 py-2 rounded-full text-xs font-medium">
+        <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-green-50 border border-green-100 text-green-600 px-4 py-2 rounded-full text-xs font-medium shadow-sm">
           Saved successfully
         </div>
       )}
@@ -136,12 +135,12 @@ export default function BuilderPage({ searchParams }: BuilderPageProps) {
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="w-6 h-6 bg-brand-600 border-2 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
+                  className="w-6 h-6 bg-brand-600 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
                 >
                   <div className="w-3 h-3 bg-white rounded-sm" />
                 </Link>
                 <div className="w-px h-4 bg-gray-100" />
-                <span className="text-sm font-medium">
+                <span className="text-gray-900 text-sm font-medium">
                   {siteName}
                 </span>
               </div>
