@@ -1,4 +1,4 @@
-import { Config } from "@measured/puck";
+import { Config, Fields } from "@measured/puck";
 
 interface HeroProps {
   title: string;
@@ -19,7 +19,11 @@ interface CardProps {
   imageUrl: string;
 }
 
-export const puckConfig: Config = {
+export const puckConfig: Config<{
+  Hero : HeroProps
+  TextBlock : TextBlockProps
+  Card : CardProps
+}> = {
   components: {
     Hero: {
       fields: {
@@ -46,7 +50,7 @@ export const puckConfig: Config = {
         buttonText: "Get Started",
         buttonLink: "#",
       },
-      render: ({ title, subtitle, buttonText, buttonLink }: HeroProps) => (
+      render: ({ title, subtitle, buttonText, buttonLink }) => (
         <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-24 px-8 text-center">
           <h1 className="text-5xl font-bold mb-4">{title}</h1>
           <p className="text-xl text-blue-100 mb-8 text-w-2xl mx-auto">
