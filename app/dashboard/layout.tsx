@@ -1,7 +1,7 @@
 import React from "react";
 
 interface DashboardProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 export default function DashboardLayout({ children }: DashboardProps) {
