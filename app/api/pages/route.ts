@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(data);
 }
 
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
   const supabase = await createSupabaseServer();
 
   const body = await request.json();
