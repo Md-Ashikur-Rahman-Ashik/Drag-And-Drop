@@ -1,4 +1,5 @@
 import type { Config } from "@measured/puck";
+import ImageUploader from "../components/ImageUploader";
 
 interface NavLink {
   label: string;
@@ -233,8 +234,11 @@ export const puckConfig: Config<{
           label: "Description",
         },
         imageUrl: {
-          type: "text",
-          label: "Image URL",
+          type: "custom",
+          label: "Image",
+          render: ({ value, onChange }) => (
+            <ImageUploader value={value} onChange={onChange} label="Image" />
+          ),
         },
       },
       defaultProps: {
@@ -380,7 +384,13 @@ export const puckConfig: Config<{
         subtitle: { type: "textarea", label: "Subtitle" },
         buttonText: { type: "text", label: "Button Text" },
         buttonLink: { type: "text", label: "Button Link" },
-        imageUrl: { type: "text", label: "Image URL" },
+        imageUrl: {
+          type: "custom",
+          label: "Image",
+          render: ({ value, onChange }) => (
+            <ImageUploader value={value} onChange={onChange} label="Image" />
+          ),
+        },
         imagePosition: {
           type: "select",
           label: "Image Position",
@@ -683,7 +693,13 @@ export const puckConfig: Config<{
     },
     ImageBlock: {
       fields: {
-        imageUrl: { type: "text", label: "Image URL" },
+        imageUrl: {
+          type: "custom",
+          label: "Image",
+          render: ({ value, onChange }) => (
+            <ImageUploader value={value} onChange={onChange} label="Image" />
+          ),
+        },
         altText: { type: "text", label: "Alt Text" },
         caption: { type: "text", label: "Caption" },
         size: {
