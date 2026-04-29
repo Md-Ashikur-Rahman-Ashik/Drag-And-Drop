@@ -16,7 +16,7 @@ export default async function PageRenderer({ params }: RendererProps) {
 
   const { data: site, error: siteError } = await supabase
     .from("sites")
-    .select("id, name")
+    .select("id, name, slug")
     .eq("slug", siteSlug)
     .single();
 
@@ -27,7 +27,7 @@ export default async function PageRenderer({ params }: RendererProps) {
   const { data: page, error: pageError } = await supabase
     .from("pages")
     .select("*")
-    .eq("site_id", site.id)
+    .eq("site_id", site?.id)
     .eq("slug", pageSlug)
     .single();
 

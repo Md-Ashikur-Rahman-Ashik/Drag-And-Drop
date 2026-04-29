@@ -23,7 +23,9 @@ export default function BuilderPage() {
   const [siteName, setSiteName] = useState("Untitled Site");
   const [loading, setLoading] = useState(true);
   const [siteSlug, setSiteSlug] = useState<string | null>(null);
+  const [switching, setSwitching] = useState(false);
   const currentDataRef = useRef<Data>(emptyData);
+  const isSwitchingRef = useRef(false);
 
   useEffect(() => {
     const loadBuilder = async () => {
@@ -32,6 +34,8 @@ export default function BuilderPage() {
         setLoading(false);
         return;
       }
+
+      isSwitchingRef.current = true;
 
       setSiteId(paramSiteId);
 
@@ -49,11 +53,17 @@ export default function BuilderPage() {
         if (pagesData.length > 0) {
           setPages(pagesData);
           const firstPage = pagesData[0];
+          const firstData = firstPage.content?.content
+            ? firstPage.content
+            : emptyData;
+
+          currentDataRef.current = firstData;
           setCurrentPage(firstPage);
-          if (firstPage.content?.content) {
-            setPageData(firstPage.content);
-            currentDataRef.current = firstPage.content;
-          }
+          setPageData(firstData);
+
+          setTimeout(() => {
+            isSwitchingRef.current = false;
+          }, 500);
         }
       }
 
@@ -102,19 +112,38 @@ export default function BuilderPage() {
   };
 
   const handlePageSelect = async (page: Page) => {
+    if (page.id === currentPage?.id) return;
+
     if (currentPage && currentDataRef.current) {
       await savePage(currentPage.id, currentDataRef.current);
     }
 
-    setCurrentPage(page);
+    isSwitchingRef.current = true;
+    setSwitching(true);
+    currentDataRef.current = emptyData;
+
     const response = await fetch(`/api/pages/${page.id}`);
     if (response.ok) {
       const pageDetail = await response.json();
       const newData = pageDetail.content?.content
         ? pageDetail.content
         : emptyData;
-      setPageData(newData);
+
       currentDataRef.current = newData;
+      setCurrentPage(page);
+      setPageData(newData);
+
+      setTimeout(() => {
+        isSwitchingRef.current = false;
+        setSwitching(false);
+      }, 500);
+    } else {
+      setCurrentPage(page);
+      setPageData(emptyData);
+      setTimeout(() => {
+        isSwitchingRef.current = false;
+        setSwitching(false);
+      }, 500);
     }
   };
 
@@ -149,13 +178,25 @@ export default function BuilderPage() {
           Saved successfully
         </div>
       )}
+
+      {switching && (
+        <div className="absolute inset-0 z-40 bg-white/80 backdrop-blur-sm flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-6 h-6 border border-gray-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-2" />
+            <p className="text-gray-400 text-xs">Loading page...</p>
+          </div>
+        </div>
+      )}
+
       <Puck
-      key={currentPage?.id || "empty"}
+        key={currentPage?.id || "empty"}
         config={puckConfig}
         data={pageData}
         onPublish={handlePublish}
         onChange={(data) => {
-          currentDataRef.current = data;
+          if (!isSwitchingRef.current) {
+            currentDataRef.current = data;
+          }
         }}
         overrides={{
           header: ({ actions }) => (
