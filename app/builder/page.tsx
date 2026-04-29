@@ -22,6 +22,7 @@ export default function BuilderPage() {
   const [siteId, setSiteId] = useState<string | null>(null);
   const [siteName, setSiteName] = useState("Untitled Site");
   const [loading, setLoading] = useState(true);
+  const [siteSlug, setSiteSlug] = useState<string | null>(null);
   const currentDataRef = useRef<Data>(emptyData);
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function BuilderPage() {
       if (siteRes.ok) {
         const site = await siteRes.json();
         setSiteName(site.name);
+        setSiteSlug(site.slug);
       }
 
       const pagesRes = await fetch(`/api/pages?siteId=${paramSiteId}`);
