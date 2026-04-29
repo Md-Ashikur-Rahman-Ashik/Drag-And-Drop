@@ -201,8 +201,22 @@ export default function BuilderPage() {
               </div>
             </div>
           ),
-          actionBar: ({ children }) => (
-            <div className="flex items-center gap-2">{children}</div>
+          components: ({ children }) => (
+            <div className="flex flex-col h-full overflow-hidden">
+              {siteId && (
+                <BuilderPageManager
+                  siteId={siteId}
+                  pages={pages}
+                  currentPageId={currentPage?.id || null}
+                  onPageSelect={handlePageSelect}
+                  onPageCreate={handlePageCreate}
+                  onPageDelete={handlePageDelete}
+                />
+              )}
+              <div className="flex-1 overflow-y-auto">
+                {children}
+              </div>
+            </div>
           ),
         }}
       />
