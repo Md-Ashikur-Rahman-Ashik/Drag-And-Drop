@@ -182,7 +182,7 @@ export default function BuilderPage() {
               <div className="flex items-center gap-2">
                 {currentPage && (
                   <a
-                    href={`/sites/${siteName.toLowerCase().replace(/\s+/g, "-")}/${currentPage.slug}`}
+                    href={`/sites/${siteSlug}/${currentPage.slug}`}
                     target="_blank"
                     className="text-gray-400 hover:text-gray-600 text-xs px-3 py-1.5 rounded-md border border-gray-200 hover:border-gray-300 transition-all"
                   >
