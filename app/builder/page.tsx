@@ -150,6 +150,7 @@ export default function BuilderPage() {
         </div>
       )}
       <Puck
+      key={currentPage?.id || "empty"}
         config={puckConfig}
         data={pageData}
         onPublish={handlePublish}
