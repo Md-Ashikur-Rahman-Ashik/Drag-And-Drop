@@ -52,7 +52,6 @@ export default function BuilderPage() {
 
         if (pagesData.length > 0) {
           setPages(pagesData);
-          // Load the first page by default
           const firstPage = pagesData[0];
           setCurrentPage(firstPage);
           if (firstPage.content?.content) {
