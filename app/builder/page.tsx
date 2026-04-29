@@ -197,7 +197,7 @@ export default function BuilderPage() {
               </div>
             </div>
           ),
-          components: ({ children }) => (
+          drawer: ({ children }) => (
             <div className="flex flex-col h-full overflow-hidden">
               {siteId && (
                 <BuilderPageManager
