@@ -1,5 +1,6 @@
 "use client";
 
+import { Page } from "../lib/types";
 import { Puck, Data } from "@measured/puck";
 import { puckConfig } from "../lib/puck-config";
 import "@measured/puck/dist/index.css";
@@ -8,13 +9,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import BuilderPageManager from "../components/BuilderPageManager";
-
-interface Page {
-  id: string;
-  title: string;
-  slug: string;
-  content: Data;
-}
 
 const emptyData: Data = { content: [], root: {} };
 
