@@ -180,7 +180,7 @@ export default function BuilderPage() {
               <div className="flex items-center gap-2">
                 {currentPage && (
                   <a
-                    href={`/sites/${siteId ? "" : ""}`}
+                    href={`/sites/${siteName.toLowerCase().replace(/\s+/g, "-")}/${currentPage.slug}`}
                     target="_blank"
                     className="text-gray-400 hover:text-gray-600 text-xs px-3 py-1.5 rounded-md border border-gray-200 hover:border-gray-300 transition-all"
                   >
@@ -207,9 +207,7 @@ export default function BuilderPage() {
                   onPageDelete={handlePageDelete}
                 />
               )}
-              <div className="flex-1 overflow-y-auto">
-                {children}
-              </div>
+              <div className="flex-1 overflow-y-auto">{children}</div>
             </div>
           ),
         }}
