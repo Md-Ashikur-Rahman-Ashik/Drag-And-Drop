@@ -1,12 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-interface Page {
-  id: string;
-  title: string;
-  slug: string;
-}
+import { Page } from "../lib/types";
 
 interface BuilderPageManagerProps {
   siteId: string;
