@@ -153,6 +153,8 @@ export default function BuilderPage() {
   };
 
   const handlePageDelete = (pageId: string) => {
+    if(pages.length === 1) return
+    
     const remaining = pages.filter((p) => p.id !== pageId);
     setPages(remaining);
     if (currentPage?.id === pageId && remaining.length > 0) {
