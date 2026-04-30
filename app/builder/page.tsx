@@ -203,21 +203,21 @@ export default function BuilderPage() {
         overrides={{
           header: ({ actions }) => (
             <div className="h-11 bg-white border-b border-gray-100 flex items-center justify-between px-3">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
                   className="w-6 h-6 border-2 bg-brand-600 rounded-md flex items-center justify-center"
                 >
                   <div className="w-3 h-3 bg-white rounded-sm" />
                 </Link>
-                <div className="w-px h-4 bg-gray-100" />
+                <div className="w-px h-4 bg-gray-500" />
                 <span className="text-sm font-medium">
                   {siteName}
                 </span>
                 {currentPage && (
                   <>
-                    <div className="w-px h-4 bg-gray-100" />
-                    <span className="text-xs">
+                    <div className="w-px h-4 bg-gray-500" />
+                    <span className="text-xs font-bold">
                       {currentPage.title}
                     </span>
                   </>
@@ -228,7 +228,7 @@ export default function BuilderPage() {
                   <a
                     href={`/sites/${siteSlug}/${currentPage.slug}`}
                     target="_blank"
-                    className="text-xs px-3 rounded-md border"
+                    className="rounded transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 px-3 py-1 text-[14px]"
                   >
                     Preview
                   </a>
