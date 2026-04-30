@@ -26,7 +26,7 @@ export default function Navbar({
       <div className="flex items-center gap-3">
         <Link
           href={"/dashboard"}
-          className="w-6 h-6 bg-white rounded flex items-center justify-center hover:bg-gray-100 transition-colors shrink-0"
+          className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors shrink-0"
         >
           <div className="w-3 h-3 bg-black rounded-sm" />
         </Link>
@@ -66,7 +66,7 @@ export default function Navbar({
         )}
         <button
           onClick={onPreview}
-          className="text-[#666] hover:text-white text-xs px-3 py-1.5 rounded-md border border-[#1a1a1a] hover:border-[#333] transition-all"
+          className="text-[#666] hover:text-white text-xs px-3 rounded-md border border-[#1a1a1a] hover:border-[#333] transition-all"
         >
           Preview
         </button>
