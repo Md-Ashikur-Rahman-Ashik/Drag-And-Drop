@@ -193,6 +193,15 @@ export default function BuilderPage() {
         </div>
       )}
 
+      {currentPage && siteSlug && (
+        <iframe
+          src={`/sites/${siteSlug}/${currentPage.slug}`}
+          className="hidden"
+          title="preload"
+          onLoad={() => setIframeLoaded(true)}
+        />
+      )}
+
       {isPreview && currentPage && siteSlug && (
         <div className="fixed inset-0 z-50 bg-white flex flex-col">
           <div className="h-11 bg-gray-900 flex items-center justify-between px-4 shrink-0">
@@ -210,31 +219,28 @@ export default function BuilderPage() {
             <div className="flex items-center gap-1 bg-gray-800 rounded-md p-1">
               <button
                 onClick={() => setPreviewWidth("100%")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${
-                  previewWidth === "100%"
+                className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === "100%"
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-white"
-                }`}
+                  }`}
               >
                 Desktop
               </button>
               <button
                 onClick={() => setPreviewWidth("768px")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${
-                  previewWidth === "768px"
+                className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === "768px"
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-white"
-                }`}
+                  }`}
               >
                 Tablet
               </button>
               <button
                 onClick={() => setPreviewWidth("390px")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${
-                  previewWidth === "390px"
+                className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === "390px"
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-white"
-                }`}
+                  }`}
               >
                 Mobile
               </button>
