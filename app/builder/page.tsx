@@ -28,7 +28,7 @@ export default function BuilderPage() {
   const isSwitchingRef = useRef(false);
   const [isPreview, setIsPreview] = useState(false);
   const [previewWidth, setPreviewWidth] = useState("100%");
-  const [iframeLoaded, setIframeLoaded] = useState(false)
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
     const loadBuilder = async () => {
@@ -95,6 +95,11 @@ export default function BuilderPage() {
 
   const handlePublish = async (data: Data) => {
     currentDataRef.current = data;
+
+    setSaving(true);
+    setSaved(false);
+    setIframeLoaded(false);
+
     if (!currentPage) {
       const response = await fetch("/api/pages", {
         method: "POST",
@@ -207,7 +212,13 @@ export default function BuilderPage() {
           <div className="h-11 bg-gray-900 flex items-center justify-between px-4 shrink-0">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                <div
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    iframeLoaded
+                      ? "bg-green-400"
+                      : "bg-yellow-400 animate-pulse"
+                  }`}
+                />
                 <span className="text-white text-xs font-medium">Preview</span>
               </div>
               <div className="w-px h-4 bg-white/20" />
@@ -219,28 +230,31 @@ export default function BuilderPage() {
             <div className="flex items-center gap-1 bg-gray-800 rounded-md p-1">
               <button
                 onClick={() => setPreviewWidth("100%")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === "100%"
+                className={`px-3 py-1 rounded text-xs transition-colors ${
+                  previewWidth === "100%"
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-white"
-                  }`}
+                }`}
               >
                 Desktop
               </button>
               <button
                 onClick={() => setPreviewWidth("768px")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === "768px"
+                className={`px-3 py-1 rounded text-xs transition-colors ${
+                  previewWidth === "768px"
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-white"
-                  }`}
+                }`}
               >
                 Tablet
               </button>
               <button
                 onClick={() => setPreviewWidth("390px")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === "390px"
+                className={`px-3 py-1 rounded text-xs transition-colors ${
+                  previewWidth === "390px"
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-white"
-                  }`}
+                }`}
               >
                 Mobile
               </button>
@@ -265,13 +279,25 @@ export default function BuilderPage() {
 
           <div className="flex-1 bg-gray-100 flex items-center justify-center overflow-hidden p-4">
             <div
-              className="bg-white h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300"
+              className="bg-white h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300 relative"
               style={{ width: previewWidth }}
             >
+              {!iframeLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+                  <div className="text-center">
+                    <div className="w-6 h-6 border border-gray-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-3" />
+                    <p className="text-gray-400 text-xs">Loading preview...</p>
+                  </div>
+                </div>
+              )}
+
               <iframe
                 src={`/sites/${siteSlug}/${currentPage.slug}`}
-                className="w-full h-full border-0"
+                className={`w-full h-full border-0 transition-opacity duration-300 ${
+                  iframeLoaded ? "opacity-100" : "opacity-0"
+                }`}
                 title={`Preview — ${currentPage.title}`}
+                onLoad={() => setIframeLoaded(true)}
               />
             </div>
           </div>
@@ -305,7 +331,9 @@ export default function BuilderPage() {
                 {currentPage && (
                   <>
                     <div className="w-px h-4 bg-gray-500" />
-                    <span className="text-xs font-bold">{currentPage.title}</span>
+                    <span className="text-xs font-bold">
+                      {currentPage.title}
+                    </span>
                   </>
                 )}
               </div>
