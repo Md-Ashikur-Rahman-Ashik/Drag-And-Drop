@@ -26,6 +26,7 @@ export default function BuilderPage() {
   const [switching, setSwitching] = useState(false);
   const currentDataRef = useRef<Data>(emptyData);
   const isSwitchingRef = useRef(false);
+  const [isPreview, setIsPreview] = useState(false)
 
   useEffect(() => {
     const loadBuilder = async () => {
