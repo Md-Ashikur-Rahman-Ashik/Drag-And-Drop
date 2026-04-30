@@ -28,6 +28,7 @@ export default function BuilderPage() {
   const isSwitchingRef = useRef(false);
   const [isPreview, setIsPreview] = useState(false);
   const [previewWidth, setPreviewWidth] = useState("100%");
+  const [iframeLoaded, setIframeLoaded] = useState(false)
 
   useEffect(() => {
     const loadBuilder = async () => {
