@@ -287,27 +287,25 @@ export default function BuilderPage() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="w-6 h-6 bg-brand-600 rounded-md flex items-center justify-center hover:bg-brand-700 transition-colors"
+                  className="w-6 h-6 border-2 rounded-md flex items-center justify-center"
                 >
                   <div className="w-3 h-3 bg-white rounded-sm" />
                 </Link>
-                <div className="w-px h-4 bg-gray-100" />
+                <div className="w-px h-4 bg-gray-500" />
                 <span className="text-gray-900 text-sm font-medium">
                   {siteName}
                 </span>
                 {currentPage && (
                   <>
-                    <div className="w-px h-4 bg-gray-100" />
-                    <span className="text-gray-400 text-xs">
-                      {currentPage.title}
-                    </span>
+                    <div className="w-px h-4 bg-gray-500" />
+                    <span className="text-xs font-bold">{currentPage.title}</span>
                   </>
                 )}
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 pl-2">
                 <button
                   onClick={() => setIsPreview(true)}
-                  className="text-gray-500 hover:text-gray-800 text-xs px-3 py-1.5 rounded-md border border-gray-200 hover:border-gray-300 transition-all"
+                  className="rounded transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 text-sm px-4 py-2"
                 >
                   Preview
                 </button>
@@ -315,9 +313,9 @@ export default function BuilderPage() {
                   <a
                     href={`/sites/${siteSlug}/${currentPage.slug}`}
                     target="_blank"
-                    className="text-gray-400 hover:text-gray-600 text-xs px-3 py-1.5 rounded-md border border-gray-200 hover:border-gray-300 transition-all"
+                    className="rounded transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 text-sm px-3 flex gap-1 py-2"
                   >
-                    ↗
+                    <span>Published</span> Site
                   </a>
                 )}
                 {saved && <span className="text-green-600 text-xs">Saved</span>}
