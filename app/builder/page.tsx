@@ -27,6 +27,7 @@ export default function BuilderPage() {
   const currentDataRef = useRef<Data>(emptyData);
   const isSwitchingRef = useRef(false);
   const [isPreview, setIsPreview] = useState(false);
+  const [previewWidth, setPreviewWidth] = useState("100%");
 
   useEffect(() => {
     const loadBuilder = async () => {
@@ -175,10 +176,8 @@ export default function BuilderPage() {
   }
 
   return (
-    <div
-      className={`h-screen overflow-hidden relative ${isPreview ? "puck-preview-mode" : ""}`}
-    >
-      {saved && !isPreview && (
+    <div className="h-screen overflow-hidden relative">
+      {saved && (
         <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-green-50 border border-green-100 text-green-600 px-4 py-2 rounded-full text-xs font-medium shadow-sm">
           Saved successfully
         </div>
@@ -193,22 +192,82 @@ export default function BuilderPage() {
         </div>
       )}
 
-      {isPreview && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-gray-900/90 backdrop-blur-sm text-white px-4 py-2.5 rounded-full shadow-xl border border-white/10">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-xs font-medium">Preview mode</span>
+      {isPreview && currentPage && siteSlug && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col">
+          <div className="h-11 bg-gray-900 flex items-center justify-between px-4 shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-white text-xs font-medium">Preview</span>
+              </div>
+              <div className="w-px h-4 bg-white/20" />
+              <span className="text-gray-400 text-xs">{siteName}</span>
+              <div className="w-px h-4 bg-white/20" />
+              <span className="text-gray-300 text-xs">{currentPage.title}</span>
+            </div>
+
+            <div className="flex items-center gap-1 bg-gray-800 rounded-md p-1">
+              <button
+                onClick={() => setPreviewWidth("100%")}
+                className={`px-3 py-1 rounded text-xs transition-colors ${
+                  previewWidth === "100%"
+                    ? "bg-gray-600 text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Desktop
+              </button>
+              <button
+                onClick={() => setPreviewWidth("768px")}
+                className={`px-3 py-1 rounded text-xs transition-colors ${
+                  previewWidth === "768px"
+                    ? "bg-gray-600 text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Tablet
+              </button>
+              <button
+                onClick={() => setPreviewWidth("390px")}
+                className={`px-3 py-1 rounded text-xs transition-colors ${
+                  previewWidth === "390px"
+                    ? "bg-gray-600 text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Mobile
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <a
+                href={`/sites/${siteSlug}/${currentPage.slug}`}
+                target="_blank"
+                className="text-gray-400 hover:text-white text-xs px-3 py-1.5 rounded-md border border-gray-700 hover:border-gray-500 transition-all"
+              >
+                Open in new tab ↗
+              </a>
+              <button
+                onClick={() => setIsPreview(false)}
+                className="bg-white text-gray-900 text-xs font-medium px-4 py-1.5 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                Exit preview
+              </button>
+            </div>
           </div>
-          <div className="w-px h-4 bg-white/20" />
-          <span className="text-xs text-gray-400">{currentPage?.title}</span>
-          <div className="w-px h-4 bg-white/20" />
-          <button
-            onClick={() => setIsPreview(false)}
-            className="text-xs text-white hover:text-gray-300 transition-colors font-medium flex items-center gap-1"
-          >
-            <span>Exit preview</span>
-            <span>✕</span>
-          </button>
+
+          <div className="flex-1 bg-gray-100 flex items-center justify-center overflow-hidden p-4">
+            <div
+              className="bg-white h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300"
+              style={{ width: previewWidth }}
+            >
+              <iframe
+                src={`/sites/${siteSlug}/${currentPage.slug}`}
+                className="w-full h-full border-0"
+                title={`Preview — ${currentPage.title}`}
+              />
+            </div>
+          </div>
         </div>
       )}
 
@@ -248,11 +307,10 @@ export default function BuilderPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsPreview(true)}
-                  className="text-gray-400 hover:text-gray-700 text-xs px-3 py-1.5 rounded-md border border-gray-200 hover:border-gray-300 transition-all flex items-center gap-1.5"
+                  className="text-gray-500 hover:text-gray-800 text-xs px-3 py-1.5 rounded-md border border-gray-200 hover:border-gray-300 transition-all"
                 >
-                  <span>Preview</span>
+                  Preview
                 </button>
-
                 {currentPage && (
                   <a
                     href={`/sites/${siteSlug}/${currentPage.slug}`}
@@ -262,7 +320,6 @@ export default function BuilderPage() {
                     ↗
                   </a>
                 )}
-
                 {saved && <span className="text-green-600 text-xs">Saved</span>}
                 {saving && (
                   <span className="text-gray-400 text-xs">Saving...</span>
