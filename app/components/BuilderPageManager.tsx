@@ -81,12 +81,12 @@ export default function BuilderPageManager({
   return (
     <div className="p-3 border-b border-gray-100">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">
+        <span className="text-[10px] font-medium uppercase tracking-wider">
           Pages
         </span>
         <button
           onClick={() => setIsAdding(true)}
-          className="text-gray-300 hover:text-gray-600 transition-colors text-base leading-none"
+          className="text-black hover:text-green-500 transition-colors text-base leading-none"
         >
           +
         </button>
@@ -118,7 +118,7 @@ export default function BuilderPageManager({
             {pages.length > 1 && (
               <button
                 onClick={(e) => handleDelete(page.id, e)}
-                className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-400 transition-all text-xs shrink-0 ml-1"
+                className="opacity-0 group-hover:opacity-100 text-black hover:text-red-600 transition-all text-xs shrink-0 ml-1"
               >
                 ✕
               </button>
