@@ -40,39 +40,3 @@
 [class*="frame"] {
   background: #f3f4f6 !important;
 }
-
-.puck-preview-mode [class*="LeftSidebar"],
-.puck-preview-mode [class*="RightSidebar"],
-.puck-preview-mode [class*="rightSideBar"],
-.puck-preview-mode [class*="leftSideBar"],
-.puck-preview-mode [class*="SideBar"],
-.puck-preview-mode [class*="Header"],
-.puck-preview-mode [class*="Puck-header"],
-.puck-preview-mode [class*="Toolbar"],
-.puck-preview-mode [class*="toolbar"] {
-  display: none !important;
-}
-
-.puck-preview-mode [class*="Preview"],
-.puck-preview-mode [class*="PuckPreview"],
-.puck-preview-mode [class*="frame"],
-.puck-preview-mode [class*="Frame"],
-.puck-preview-mode [class*="canvas"],
-.puck-preview-mode [class*="Canvas"] {
-  width: 100% !important;
-  height: 100vh !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-.puck-preview-mode .Puck {
-  display: block !important;
-}
-
-.puck-preview-mode [class*="PuckLayout"],
-.puck-preview-mode [class*="layout"],
-.puck-preview-mode [class*="Layout"] {
-  grid-template-columns: 0 1fr 0 !important;
-}
