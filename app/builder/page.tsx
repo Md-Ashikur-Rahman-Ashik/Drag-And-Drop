@@ -199,17 +199,19 @@ export default function BuilderPage() {
       )}
 
       {currentPage && siteSlug && (
-        <iframe
-          src={`/sites/${siteSlug}/${currentPage.slug}`}
-          className="hidden"
-          title="preload"
-          onLoad={() => setIframeLoaded(true)}
-        />
-      )}
-
-      {isPreview && currentPage && siteSlug && (
-        <div className="fixed inset-0 z-50 bg-white flex flex-col">
-          <div className="h-11 bg-gray-900 flex items-center justify-between px-4 shrink-0">
+        <div
+          className={`
+    fixed inset-0 z-50 flex flex-col
+    ${isPreview ? "visible" : "invisible pointer-events-none"}
+  `}
+        >
+          <div
+            className={`
+      h-11 bg-gray-900 flex items-center justify-between px-4 shrink-0
+      transition-opacity duration-200
+      ${isPreview ? "opacity-100" : "opacity-0"}
+    `}
+          >
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <div
@@ -228,36 +230,23 @@ export default function BuilderPage() {
             </div>
 
             <div className="flex items-center gap-1 bg-gray-800 rounded-md p-1">
-              <button
-                onClick={() => setPreviewWidth("100%")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${
-                  previewWidth === "100%"
-                    ? "bg-gray-600 text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                Desktop
-              </button>
-              <button
-                onClick={() => setPreviewWidth("768px")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${
-                  previewWidth === "768px"
-                    ? "bg-gray-600 text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                Tablet
-              </button>
-              <button
-                onClick={() => setPreviewWidth("390px")}
-                className={`px-3 py-1 rounded text-xs transition-colors ${
-                  previewWidth === "390px"
-                    ? "bg-gray-600 text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                Mobile
-              </button>
+              {[
+                { label: "Desktop", value: "100%" },
+                { label: "Tablet", value: "768px" },
+                { label: "Mobile", value: "390px" },
+              ].map(({ label, value }) => (
+                <button
+                  key={value}
+                  onClick={() => setPreviewWidth(value)}
+                  className={`px-3 py-1 rounded text-xs transition-colors ${
+                    previewWidth === value
+                      ? "bg-gray-600 text-white"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
             <div className="flex items-center gap-2">
@@ -266,7 +255,7 @@ export default function BuilderPage() {
                 target="_blank"
                 className="text-gray-400 hover:text-white text-xs px-3 py-1.5 rounded-md border border-gray-700 hover:border-gray-500 transition-all"
               >
-                Open in new tab ↗
+                Open in new tab
               </a>
               <button
                 onClick={() => setIsPreview(false)}
@@ -282,7 +271,7 @@ export default function BuilderPage() {
               className="bg-white h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300 relative"
               style={{ width: previewWidth }}
             >
-              {!iframeLoaded && (
+              {!iframeLoaded && isPreview && (
                 <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
                   <div className="text-center">
                     <div className="w-6 h-6 border border-gray-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-3" />
@@ -293,9 +282,7 @@ export default function BuilderPage() {
 
               <iframe
                 src={`/sites/${siteSlug}/${currentPage.slug}`}
-                className={`w-full h-full border-0 transition-opacity duration-300 ${
-                  iframeLoaded ? "opacity-100" : "opacity-0"
-                }`}
+                className="w-full h-full border-0"
                 title={`Preview — ${currentPage.title}`}
                 onLoad={() => setIframeLoaded(true)}
               />
