@@ -9,11 +9,20 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
   const supabase = await createSupabaseServer();
   const { id } = await params;
   const body = await request.json();
-  const { content } = body;
+  const { content, seo_title, seo_description, seo_image } = body;
+
+  const updates: Record<string, unknown> = {
+    updated_at: new Date().toISOString(),
+  };
+
+  if (content !== undefined) updates.content = content;
+  if (seo_title !== undefined) updates.seo_title = seo_title;
+  if (seo_description !== undefined) updates.seo_description = seo_description;
+  if (seo_image !== undefined) updates.seo_image = seo_image;
 
   const { data, error } = await supabase
     .from("pages")
-    .update({ content, updated_at: new Date().toISOString() })
+    .update(updates)
     .eq("id", id)
     .select()
     .single();
