@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import BuilderPageManager from "../components/BuilderPageManager";
+import SeoPanel from "../components/SeoPanel";
 
 const emptyData: Data = { content: [], root: {} };
 
@@ -29,6 +30,7 @@ export default function BuilderPage() {
   const [isPreview, setIsPreview] = useState(false);
   const [previewWidth, setPreviewWidth] = useState("100%");
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [showSeo, setShowSeo] = useState(false);
 
   useEffect(() => {
     const loadBuilder = async () => {
@@ -291,6 +293,26 @@ export default function BuilderPage() {
         </div>
       )}
 
+      {showSeo && currentPage && (
+        <div className="fixed right-0 top-0 bottom-0 w-80 bg-white border-l border-gray-100 shadow-xl z-30 flex flex-col">
+          <SeoPanel
+            pageId={currentPage.id}
+            initialTitle={currentPage.seo_title || ""}
+            initialDescription={currentPage.seo_description || ""}
+            initialImage={currentPage.seo_image || ""}
+            pageTitle={currentPage.title}
+            onSave={(data) => {
+              setCurrentPage((prev) => (prev ? { ...prev, ...data } : prev));
+              setPages((prev) =>
+                prev.map((p) =>
+                  p.id === currentPage.id ? { ...p, ...data } : p,
+                ),
+              );
+            }}
+          />
+        </div>
+      )}
+
       <Puck
         key={currentPage?.id || "empty"}
         config={puckConfig}
@@ -330,6 +352,16 @@ export default function BuilderPage() {
                   className="rounded transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 text-sm px-4 py-2"
                 >
                   Preview
+                </button>
+                <button
+                  onClick={() => setShowSeo(!showSeo)}
+                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${
+                    showSeo
+                      ? "bg-brand-50 text-brand-600 border-brand-200"
+                      : "text-gray-400 hover:text-gray-700 border-gray-200 hover:border-gray-300"
+                  }`}
+                >
+                  SEO
                 </button>
                 {currentPage && (
                   <a
