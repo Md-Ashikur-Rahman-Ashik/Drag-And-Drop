@@ -76,13 +76,13 @@ export default function SeoPanel({
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded-md transition-colors"
+            className="rounded font-bold transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 text-xs px-3 py-1.5"
           >
             {saving ? "Saving..." : saved ? "Saved ✓" : "Save"}
           </button>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1.5 hover:bg-gray-100 rounded-md"
+            className="text-gray-400 hover:text-red-600 transition-colors p-1.5 rounded-md"
           >
             ✕
           </button>
