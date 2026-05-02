@@ -217,11 +217,10 @@ export default function BuilderPage() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    iframeLoaded
+                  className={`w-1.5 h-1.5 rounded-full ${iframeLoaded
                       ? "bg-green-400"
                       : "bg-yellow-400 animate-pulse"
-                  }`}
+                    }`}
                 />
                 <span className="text-white text-xs font-medium">Preview</span>
               </div>
@@ -240,11 +239,10 @@ export default function BuilderPage() {
                 <button
                   key={value}
                   onClick={() => setPreviewWidth(value)}
-                  className={`px-3 py-1 rounded text-xs transition-colors ${
-                    previewWidth === value
+                  className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === value
                       ? "bg-gray-600 text-white"
                       : "text-gray-400 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {label}
                 </button>
@@ -307,6 +305,7 @@ export default function BuilderPage() {
               initialDescription={currentPage.seo_description || ""}
               initialImage={currentPage.seo_image || ""}
               pageTitle={currentPage.title}
+              onClose={() => setShowSeo(false)}
               onSave={(data) => {
                 setCurrentPage((prev) => (prev ? { ...prev, ...data } : prev));
                 setPages((prev) =>
@@ -363,11 +362,10 @@ export default function BuilderPage() {
                 </button>
                 <button
                   onClick={() => setShowSeo(!showSeo)}
-                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${
-                    showSeo
+                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${showSeo
                       ? "bg-brand-50 text-brand-600 border-brand-200"
                       : "text-gray-400 hover:text-gray-700 border-gray-200 hover:border-gray-300"
-                  }`}
+                    }`}
                 >
                   SEO
                 </button>
