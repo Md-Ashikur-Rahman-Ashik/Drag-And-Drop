@@ -8,4 +8,5 @@ export interface Page {
   seo_title?: string;
   seo_description?: string;
   seo_image?: string;
+  order_index: number;
 }
