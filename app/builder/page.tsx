@@ -294,23 +294,31 @@ export default function BuilderPage() {
       )}
 
       {showSeo && currentPage && (
-        <div className="fixed right-0 top-0 bottom-0 w-80 bg-white border-l border-gray-100 shadow-xl z-30 flex flex-col">
-          <SeoPanel
-            pageId={currentPage.id}
-            initialTitle={currentPage.seo_title || ""}
-            initialDescription={currentPage.seo_description || ""}
-            initialImage={currentPage.seo_image || ""}
-            pageTitle={currentPage.title}
-            onSave={(data) => {
-              setCurrentPage((prev) => (prev ? { ...prev, ...data } : prev));
-              setPages((prev) =>
-                prev.map((p) =>
-                  p.id === currentPage.id ? { ...p, ...data } : p,
-                ),
-              );
-            }}
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
+            onClick={() => setShowSeo(false)}
           />
-        </div>
+
+          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-full max-w-lg bg-white rounded-2xl shadow-2xl flex flex-col max-h-[85vh]">
+            <SeoPanel
+              pageId={currentPage.id}
+              initialTitle={currentPage.seo_title || ""}
+              initialDescription={currentPage.seo_description || ""}
+              initialImage={currentPage.seo_image || ""}
+              pageTitle={currentPage.title}
+              onSave={(data) => {
+                setCurrentPage((prev) => (prev ? { ...prev, ...data } : prev));
+                setPages((prev) =>
+                  prev.map((p) =>
+                    p.id === currentPage.id ? { ...p, ...data } : p,
+                  ),
+                );
+                setShowSeo(false);
+              }}
+            />
+          </div>
+        </>
       )}
 
       <Puck
