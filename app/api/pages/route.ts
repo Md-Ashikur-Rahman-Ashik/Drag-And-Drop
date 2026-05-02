@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     .from("pages")
     .select("*")
     .eq("site_id", siteId)
-    .order("created_at", { ascending: true });
+    .order("order_index", { ascending: true });
 
   if (slug) {
     query = query.eq("slug", slug);
