@@ -14,6 +14,7 @@ interface SeoPanelProps {
     seo_description: string;
     seo_image: string;
   }) => void;
+  onClose?: () => void;
 }
 
 export default function SeoPanel({
@@ -23,6 +24,7 @@ export default function SeoPanel({
   initialImage = "",
   pageTitle,
   onSave,
+  onClose,
 }: SeoPanelProps) {
   const [seoTitle, setSeoTitle] = useState(initialTitle);
   const [seoDescription, setSeoDescription] = useState(initialDescription);
@@ -65,18 +67,26 @@ export default function SeoPanel({
 
   return (
     <div className="flex flex-col h-full overflow-y-auto">
-      <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
+      <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between shrink-0">
         <div>
           <h3 className="text-sm font-semibold text-gray-900">SEO Settings</h3>
           <p className="text-xs text-gray-400 mt-0.5">{pageTitle}</p>
         </div>
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-xs font-medium px-3 py-1.5 rounded-md transition-colors"
-        >
-          {saving ? "Saving..." : saved ? "Saved ✓" : "Save"}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded-md transition-colors"
+          >
+            {saving ? "Saving..." : saved ? "Saved ✓" : "Save"}
+          </button>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 transition-colors p-1.5 hover:bg-gray-100 rounded-md"
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
       <div className="p-4 space-y-5">
