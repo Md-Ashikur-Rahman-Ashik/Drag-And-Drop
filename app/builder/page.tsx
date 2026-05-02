@@ -363,8 +363,8 @@ export default function BuilderPage() {
                 <button
                   onClick={() => setShowSeo(!showSeo)}
                   className={`text-xs px-3 py-1.5 rounded-md border transition-all ${showSeo
-                      ? "bg-brand-50 text-brand-600 border-brand-200"
-                      : "text-gray-400 hover:text-gray-700 border-gray-200 hover:border-gray-300"
+                      ? "bg-brand-50 border-brand-200"
+                      : "hover:border-gray-300"
                     }`}
                 >
                   SEO
