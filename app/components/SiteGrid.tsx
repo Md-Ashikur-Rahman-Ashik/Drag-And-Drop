@@ -37,7 +37,7 @@ export default function SiteGrid({ initialSites }: SiteGridProps) {
           <div key={site.id} className="relative group">
             <Link href={`/builder?siteId=${site.id}`}>
               <div className="bg-white border border-gray-200 hover:border-brand-300 hover:shadow-sm rounded-xl p-5 transition-all duration-150 cursor-pointer">
-                <div className="w-8 h-8 bg-brand-50 rounded-lg mb-4 flex items-center justify-center">
+                <div className="w-8 h-8 bg-brand-50 rounded-lg border-2 mb-4 flex items-center justify-center">
                   <span className="text-brand-600 text-xs font-semibold">
                     {site.name.charAt(0).toUpperCase()}
                   </span>
@@ -45,7 +45,7 @@ export default function SiteGrid({ initialSites }: SiteGridProps) {
                 <p className="text-sm font-medium text-gray-900 mb-1">
                   {site.name}
                 </p>
-                <p className="text-gray-300 text-xs">/{site.slug}</p>
+                <p className="text-xs">/{site.slug}</p>
                 <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span className="text-brand-600 text-xs font-medium">
                     Open builder →
@@ -68,11 +68,11 @@ export default function SiteGrid({ initialSites }: SiteGridProps) {
         ))}
 
         <Link href="/dashboard/new">
-          <div className="bg-white border border-dashed border-gray-200 hover:border-brand-300 rounded-xl p-5 transition-all duration-150 cursor-pointer flex flex-col items-center justify-center min-h-[130px] gap-2">
+          <div className="bg-white border border-dashed hover:border-brand-300 rounded-xl p-5 transition-all duration-150 cursor-pointer flex flex-col items-center justify-center min-h-[130px] gap-2">
             <div className="w-8 h-8 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center">
-              <span className="text-gray-300 text-lg">+</span>
+              <span className="text-lg">+</span>
             </div>
-            <p className="text-gray-300 text-xs">New site</p>
+            <p className="text-xs">New site</p>
           </div>
         </Link>
       </div>
