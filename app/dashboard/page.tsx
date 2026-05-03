@@ -1,4 +1,5 @@
 import SignOutButton from "../components/SignOutButton";
+import SiteGrid from "../components/SiteGrid";
 import { createSupabaseServer } from "../lib/supabase-server";
 import Link from "next/link";
 
@@ -40,6 +41,12 @@ export default async function DashboardPage() {
               {sites.length} site{sites.length !== 1 ? "s" : ""}
             </p>
           </div>
+          <Link
+            href="/dashboard/new"
+            className="bg-brand-600 text-xs font-medium px-4 py-2 rounded-lg hover:bg-brand-700 transition-colors"
+          >
+            New site
+          </Link>
         </div>
 
         {sites.length === 0 ? (
@@ -59,30 +66,7 @@ export default async function DashboardPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {sites.map((site) => (
-              <Link key={site.id} href={`/builder?siteId=${site.id}`}>
-                <div className="group bg-white border border-gray-200 hover:border-brand-300 hover:shadow-sm rounded-xl p-5 transition-all duration-150 cursor-pointer">
-                  <p className="text-sm font-medium mb-1">{site.name}</p>
-                  <p className="text-xs">/{site.slug}</p>
-                  <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-brand-600 text-xs font-medium">
-                      Open builder →
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-
-            <Link href="/dashboard/new">
-              <div className="bg-white border border-dashed hover:border-brand-300 rounded-xl p-5 transition-all duration-150 cursor-pointer flex flex-col items-center justify-center min-h-[130px] gap-2">
-                <div className="w-8 h-8 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center">
-                  <span className="text-lg">+</span>
-                </div>
-                <p className="text-xs">New site</p>
-              </div>
-            </Link>
-          </div>
+          <SiteGrid initialSites={sites} />
         )}
       </div>
     </div>
