@@ -35,9 +35,14 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const supabase = await createSupabaseServer();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  console.log("API user:", user?.id);
 
   const body = await request.json();
-  const { siteId, title, slug, content } = body;
+  const { siteId, title, slug, content, order_index } = body;
+  console.log("Upserting page:", { siteId, title, slug });
 
   if (!siteId || !title || !slug) {
     return NextResponse.json(
@@ -49,11 +54,19 @@ export async function POST(request: NextRequest) {
   const { data, error } = await supabase
     .from("pages")
     .upsert(
-      { site_id: siteId, title, slug, content },
-      { onConflict: "site_id, slug" },
+      {
+        site_id: siteId,
+        title,
+        slug,
+        content,
+        order_index: order_index ?? 0,
+      },
+      { onConflict: "site_id,slug" },
     )
     .select()
     .single();
+
+  console.log("Upsert result:", { data, error });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
