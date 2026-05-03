@@ -156,8 +156,8 @@ export default function BuilderPageManager({
           })),
         }),
       });
-    } catch (err) {
-      console.error("Failed to save page order:", err);
+    } catch {
+      onPagesReorder(pages)
     }
   };
 
