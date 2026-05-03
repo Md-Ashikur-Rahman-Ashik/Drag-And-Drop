@@ -153,7 +153,7 @@ export default function SiteSettingsModal({
             <button
               onClick={handleSave}
               disabled={saving || !name || !slug}
-              className="mt-4 bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+              className="rounded font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 text-sm px-3 py-1.5 mt-4"
             >
               {saving ? "Saving..." : "Save changes"}
             </button>
