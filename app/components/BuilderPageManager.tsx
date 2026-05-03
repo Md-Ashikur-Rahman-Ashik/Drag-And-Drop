@@ -67,7 +67,7 @@ function SortablePageItem({
       <button
         {...attributes}
         {...listeners}
-        className="mr-1.5 text-gray-200 hover:text-gray-400 cursor-grab active:cursor-grabbing transition-colors shrink-0"
+        className="mr-1.5 hover:text-green-400 cursor-grab active:cursor-grabbing transition-colors shrink-0"
         onClick={(e) => e.stopPropagation()}
       >
         ⠿
@@ -79,16 +79,16 @@ function SortablePageItem({
       >
         <div
           className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-            isSelected ? "bg-brand-600" : "bg-gray-300"
+            isSelected ? "bg-green-600" : "bg-gray-300"
           }`}
         />
-        <span className="truncate">{page.title}</span>
+        <span className="text-black">{page.title}</span>
       </div>
 
       {canDelete && (
         <button
           onClick={(e) => onDelete(page.id, e)}
-          className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-400 transition-all text-xs shrink-0 ml-1"
+          className="opacity-0 group-hover:opacity-100 text-black hover:text-red-600 transition-all text-xs shrink-0 ml-1"
         >
           ✕
         </button>
@@ -216,12 +216,12 @@ export default function BuilderPageManager({
   return (
     <div className="p-3 border-b border-gray-100">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">
+        <span className="text-[10px] font-medium uppercase tracking-wider">
           Pages
         </span>
         <button
           onClick={() => setIsAdding(true)}
-          className="text-gray-300 hover:text-gray-600 transition-colors text-base leading-none"
+          className="hover:text-green-600 transition-colors text-base leading-none"
         >
           +
         </button>
