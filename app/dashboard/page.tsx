@@ -41,12 +41,6 @@ export default async function DashboardPage() {
               {sites.length} site{sites.length !== 1 ? "s" : ""}
             </p>
           </div>
-          <Link
-            href="/dashboard/new"
-            className="bg-brand-600 text-xs font-medium px-4 py-2 rounded-lg hover:bg-brand-700 transition-colors"
-          >
-            New site
-          </Link>
         </div>
 
         {sites.length === 0 ? (
