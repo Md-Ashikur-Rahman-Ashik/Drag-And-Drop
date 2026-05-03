@@ -32,6 +32,10 @@ export default function BuilderPage() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [showSeo, setShowSeo] = useState(false);
 
+  const handlePagesReorder = (reorderedPages: Page[]) => {
+    setPages(reorderedPages);
+  };
+
   useEffect(() => {
     const loadBuilder = async () => {
       const paramSiteId = searchParams.get("siteId");
@@ -217,10 +221,11 @@ export default function BuilderPage() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-1.5 h-1.5 rounded-full ${iframeLoaded
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    iframeLoaded
                       ? "bg-green-400"
                       : "bg-yellow-400 animate-pulse"
-                    }`}
+                  }`}
                 />
                 <span className="text-white text-xs font-medium">Preview</span>
               </div>
@@ -239,10 +244,11 @@ export default function BuilderPage() {
                 <button
                   key={value}
                   onClick={() => setPreviewWidth(value)}
-                  className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === value
+                  className={`px-3 py-1 rounded text-xs transition-colors ${
+                    previewWidth === value
                       ? "bg-gray-600 text-white"
                       : "text-gray-400 hover:text-white"
-                    }`}
+                  }`}
                 >
                   {label}
                 </button>
@@ -362,10 +368,11 @@ export default function BuilderPage() {
                 </button>
                 <button
                   onClick={() => setShowSeo(!showSeo)}
-                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${showSeo
+                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${
+                    showSeo
                       ? "bg-brand-50 border-brand-200"
                       : "hover:border-gray-300"
-                    }`}
+                  }`}
                 >
                   SEO
                 </button>
@@ -396,6 +403,7 @@ export default function BuilderPage() {
                   onPageSelect={handlePageSelect}
                   onPageCreate={handlePageCreate}
                   onPageDelete={handlePageDelete}
+                  onPagesReorder={handlePagesReorder}
                 />
               )}
               <div className="flex-1 overflow-y-auto">{children}</div>
