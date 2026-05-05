@@ -1,4 +1,4 @@
-import { Data } from "@measured/puck";
+import { Data, ComponentData } from "@measured/puck";
 
 export interface Template {
   id: string;
@@ -7,6 +7,16 @@ export interface Template {
   category: string;
   preview: string;
   data: Data;
+}
+
+export function prepareTemplateData(data: Data): Data {
+  return {
+    ...data,
+    content: data.content.map((component, index) => ({
+      ...component,
+      id: `${(component as ComponentData).type.toLowerCase()}-${index}-${Date.now()}`,
+    })),
+  };
 }
 
 export const templates: Template[] = [
