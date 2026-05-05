@@ -20,7 +20,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { Page } from "../lib/types";
 import TemplatePicker from "./TemplatePicker";
-import { Template } from "../lib/templates";
+import { prepareTemplateData, Template } from "../lib/templates";
 
 function SortablePageItem({
   page,
@@ -58,9 +58,10 @@ function SortablePageItem({
       className={`
         flex items-center justify-between px-2.5 py-1.5 rounded-md
         cursor-pointer text-xs group transition-colors relative
-        ${isSelected
-          ? "bg-brand-50 text-brand-600 font-medium"
-          : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+        ${
+          isSelected
+            ? "bg-brand-50 text-brand-600 font-medium"
+            : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
         }
         ${isDragging ? "shadow-md bg-white border border-gray-200" : ""}
       `}
@@ -79,8 +80,9 @@ function SortablePageItem({
         onClick={() => onSelect(page)}
       >
         <div
-          className={`w-1.5 h-1.5 rounded-full shrink-0 ${isSelected ? "bg-green-600" : "bg-gray-300"
-            }`}
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+            isSelected ? "bg-green-600" : "bg-gray-300"
+          }`}
         />
         <span className="text-black">{page.title}</span>
       </div>
@@ -120,7 +122,7 @@ export default function BuilderPageManager({
   const [newTitle, setNewTitle] = useState("");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
-  const [showTemplatePicker, setShowTemplatePicker] = useState(false)
+  const [showTemplatePicker, setShowTemplatePicker] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -158,7 +160,7 @@ export default function BuilderPageManager({
         }),
       });
     } catch {
-      onPagesReorder(pages)
+      onPagesReorder(pages);
     }
   };
 
@@ -172,6 +174,11 @@ export default function BuilderPageManager({
       .replace(/\s+/g, "-")
       .replace(/[^a-z0-9-]/g, "");
 
+    const content =
+      template && template.id !== "blank"
+        ? prepareTemplateData(template.data)
+        : { content: [], root: {} };
+
     try {
       const response = await fetch("/api/pages", {
         method: "POST",
@@ -180,7 +187,7 @@ export default function BuilderPageManager({
           siteId,
           title: newTitle.trim(),
           slug,
-          content: template?.data || { content: [], root: {} },
+          content,
           order_index: pages.length,
         }),
       });
@@ -195,7 +202,7 @@ export default function BuilderPageManager({
       onPageCreate(data);
       setNewTitle("");
       setIsAdding(false);
-      setShowTemplatePicker(false)
+      setShowTemplatePicker(false);
     } catch {
       setError("Failed to create page");
     } finally {
@@ -259,10 +266,10 @@ export default function BuilderPageManager({
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") setShowTemplatePicker(true)
+              if (e.key === "Enter") setShowTemplatePicker(true);
               if (e.key === "Escape") {
-                setIsAdding(false)
-                setNewTitle("")
+                setIsAdding(false);
+                setNewTitle("");
               }
             }}
             placeholder="Page name"
@@ -280,9 +287,9 @@ export default function BuilderPageManager({
             </button>
             <button
               onClick={() => {
-                setIsAdding(false)
-                setNewTitle("")
-                setError("")
+                setIsAdding(false);
+                setNewTitle("");
+                setError("");
               }}
               className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs py-1.5 rounded-md transition-colors"
             >
@@ -298,7 +305,8 @@ export default function BuilderPageManager({
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
             onClick={() => setShowTemplatePicker(false)}
           />
-          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col"
+          <div
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col"
             style={{ height: "80vh" }}
           >
             <TemplatePicker
