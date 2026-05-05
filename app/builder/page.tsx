@@ -32,23 +32,20 @@ export default function BuilderPage() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [showSeo, setShowSeo] = useState(false);
 
-  const originalError = console.error
-  console.error = (...args) => {
-    if (args[0]?.includes?.("Each child in a list should have a unique")) return
-    originalError(...args)
-  }
-
   useEffect(() => {
-    const originalError = console.error
+    const originalError = console.error;
     console.error = (...args: unknown[]) => {
       if (
         typeof args[0] === "string" &&
         args[0].includes("Each child in a list")
-      ) return
-      originalError(...args)
-    }
-    return () => { console.error = originalError }
-  }, [])
+      )
+        return;
+      originalError(...args);
+    };
+    return () => {
+      console.error = originalError;
+    };
+  }, []);
 
   const handlePagesReorder = (reorderedPages: Page[]) => {
     setPages(reorderedPages);
@@ -84,13 +81,15 @@ export default function BuilderPage() {
             ? firstPage.content
             : emptyData;
 
-          currentDataRef.current = firstData;
-          setCurrentPage(firstPage);
           setPageData(firstData);
+          currentDataRef.current = firstData;
 
           setTimeout(() => {
-            isSwitchingRef.current = false;
-          }, 500);
+            setCurrentPage(firstPage);
+            setTimeout(() => {
+              isSwitchingRef.current = false;
+            }, 500);
+          }, 50);
         }
       }
 
@@ -239,10 +238,11 @@ export default function BuilderPage() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-1.5 h-1.5 rounded-full ${iframeLoaded
-                    ? "bg-green-400"
-                    : "bg-yellow-400 animate-pulse"
-                    }`}
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    iframeLoaded
+                      ? "bg-green-400"
+                      : "bg-yellow-400 animate-pulse"
+                  }`}
                 />
                 <span className="text-white text-xs font-medium">Preview</span>
               </div>
@@ -261,10 +261,11 @@ export default function BuilderPage() {
                 <button
                   key={value}
                   onClick={() => setPreviewWidth(value)}
-                  className={`px-3 py-1 rounded text-xs transition-colors ${previewWidth === value
-                    ? "bg-gray-600 text-white"
-                    : "text-gray-400 hover:text-white"
-                    }`}
+                  className={`px-3 py-1 rounded text-xs transition-colors ${
+                    previewWidth === value
+                      ? "bg-gray-600 text-white"
+                      : "text-gray-400 hover:text-white"
+                  }`}
                 >
                   {label}
                 </button>
@@ -384,10 +385,11 @@ export default function BuilderPage() {
                 </button>
                 <button
                   onClick={() => setShowSeo(!showSeo)}
-                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${showSeo
-                    ? "bg-brand-50 border-brand-200"
-                    : "hover:border-gray-300"
-                    }`}
+                  className={`text-xs px-3 py-1.5 rounded-md border transition-all ${
+                    showSeo
+                      ? "bg-brand-50 border-brand-200"
+                      : "hover:border-gray-300"
+                  }`}
                 >
                   SEO
                 </button>
