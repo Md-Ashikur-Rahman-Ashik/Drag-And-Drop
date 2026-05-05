@@ -1,7 +1,7 @@
 "use client";
 
 import { Page } from "../lib/types";
-import { Puck, Data } from "@measured/puck";
+import { Puck, Data, ComponentData } from "@measured/puck";
 import { puckConfig } from "../lib/puck-config";
 import "@measured/puck/dist/index.css";
 import "./puck-overrides.css";
@@ -82,6 +82,10 @@ export default function BuilderPage() {
             : emptyData;
 
           setPageData(firstData);
+          console.log("Setting page data:", {
+            componentCount: firstData.content?.length,
+            components: firstData.content?.map((c: ComponentData) => c.type),
+          });
           currentDataRef.current = firstData;
 
           setTimeout(() => {
@@ -349,6 +353,10 @@ export default function BuilderPage() {
         data={pageData}
         onPublish={handlePublish}
         onChange={(data) => {
+          console.log("onChange:", {
+            isSwitching: isSwitchingRef.current,
+            componentCount: data.content?.length,
+          });
           if (!isSwitchingRef.current) {
             currentDataRef.current = data;
           }
