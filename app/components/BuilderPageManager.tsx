@@ -19,6 +19,8 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Page } from "../lib/types";
+import TemplatePicker from "./TemplatePicker";
+import { Template } from "../lib/templates";
 
 function SortablePageItem({
   page,
@@ -56,10 +58,9 @@ function SortablePageItem({
       className={`
         flex items-center justify-between px-2.5 py-1.5 rounded-md
         cursor-pointer text-xs group transition-colors relative
-        ${
-          isSelected
-            ? "bg-brand-50 text-brand-600 font-medium"
-            : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+        ${isSelected
+          ? "bg-brand-50 text-brand-600 font-medium"
+          : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
         }
         ${isDragging ? "shadow-md bg-white border border-gray-200" : ""}
       `}
@@ -78,9 +79,8 @@ function SortablePageItem({
         onClick={() => onSelect(page)}
       >
         <div
-          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-            isSelected ? "bg-green-600" : "bg-gray-300"
-          }`}
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${isSelected ? "bg-green-600" : "bg-gray-300"
+            }`}
         />
         <span className="text-black">{page.title}</span>
       </div>
@@ -120,6 +120,7 @@ export default function BuilderPageManager({
   const [newTitle, setNewTitle] = useState("");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
+  const [showTemplatePicker, setShowTemplatePicker] = useState(false)
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -161,7 +162,7 @@ export default function BuilderPageManager({
     }
   };
 
-  const handleCreate = async () => {
+  const handleCreate = async (template?: Template) => {
     if (!newTitle.trim()) return;
     setCreating(true);
     setError("");
@@ -179,7 +180,7 @@ export default function BuilderPageManager({
           siteId,
           title: newTitle.trim(),
           slug,
-          content: { content: [], root: {} },
+          content: template?.data || { content: [], root: {} },
           order_index: pages.length,
         }),
       });
@@ -194,6 +195,7 @@ export default function BuilderPageManager({
       onPageCreate(data);
       setNewTitle("");
       setIsAdding(false);
+      setShowTemplatePicker(false)
     } catch {
       setError("Failed to create page");
     } finally {
@@ -251,16 +253,16 @@ export default function BuilderPageManager({
         </SortableContext>
       </DndContext>
 
-      {isAdding && (
+      {isAdding && !showTemplatePicker && (
         <div className="mt-2 space-y-1.5">
           <input
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") handleCreate();
+              if (e.key === "Enter") setShowTemplatePicker(true)
               if (e.key === "Escape") {
-                setIsAdding(false);
-                setNewTitle("");
+                setIsAdding(false)
+                setNewTitle("")
               }
             }}
             placeholder="Page name"
@@ -270,17 +272,17 @@ export default function BuilderPageManager({
           {error && <p className="text-red-500 text-[10px]">{error}</p>}
           <div className="flex gap-1.5">
             <button
-              onClick={handleCreate}
-              disabled={creating || !newTitle.trim()}
+              onClick={() => setShowTemplatePicker(true)}
+              disabled={!newTitle.trim()}
               className="flex-1 bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-white text-xs py-1.5 rounded-md transition-colors font-medium"
             >
-              {creating ? "Creating..." : "Create"}
+              Continue →
             </button>
             <button
               onClick={() => {
-                setIsAdding(false);
-                setNewTitle("");
-                setError("");
+                setIsAdding(false)
+                setNewTitle("")
+                setError("")
               }}
               className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs py-1.5 rounded-md transition-colors"
             >
@@ -288,6 +290,24 @@ export default function BuilderPageManager({
             </button>
           </div>
         </div>
+      )}
+
+      {showTemplatePicker && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
+            onClick={() => setShowTemplatePicker(false)}
+          />
+          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col"
+            style={{ height: "80vh" }}
+          >
+            <TemplatePicker
+              title={`Choose template for "${newTitle}"`}
+              onSelect={(template) => handleCreate(template)}
+              onClose={() => setShowTemplatePicker(false)}
+            />
+          </div>
+        </>
       )}
     </div>
   );
