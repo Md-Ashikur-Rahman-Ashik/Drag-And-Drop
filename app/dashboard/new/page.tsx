@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createSupabaseBrowser } from "@/lib/supabase-browser";
+import { createSupabaseBrowser } from "../../lib/supabase-browser";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import TemplatePicker from "../../components/TemplatePicker";
@@ -90,21 +90,21 @@ export default function NewSitePage() {
   if (step === "name") {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center p-6">
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm border-2 p-6 rounded-lg">
           <Link
             href="/dashboard"
-            className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 text-xs transition-colors mb-8"
+            className="flex items-center gap-1.5 hover:text-gray-600 text-xs transition-colors mb-8"
           >
             <span>←</span>
             <span>Back to dashboard</span>
           </Link>
 
           <div className="flex items-center gap-2 mb-6">
-            <div className="w-5 h-5 bg-brand-600 rounded-full flex items-center justify-center text-white text-[10px] font-bold">
+            <div className="w-5 h-5 bg-brand-600 rounded-full flex items-center justify-center text-[10px] font-bold">
               1
             </div>
-            <div className="flex-1 h-0.5 bg-gray-100" />
-            <div className="w-5 h-5 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 text-[10px] font-bold">
+            <div className="flex-1 h-0.5 bg-gray-500" />
+            <div className="w-5 h-5 bg-gray-100 rounded-full flex items-center justify-center text-[10px] font-bold">
               2
             </div>
           </div>
@@ -112,13 +112,13 @@ export default function NewSitePage() {
           <h1 className="text-xl font-semibold text-gray-900 mb-1">
             Name your site
           </h1>
-          <p className="text-sm text-gray-400 mb-7">
+          <p className="text-sm text-gray-800 mb-7">
             You can always change this later.
           </p>
 
           <div className="space-y-3 mb-4">
             <div>
-              <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-medium text-gray-800 uppercase tracking-wider mb-1.5">
                 Site name
               </label>
               <input
@@ -128,11 +128,11 @@ export default function NewSitePage() {
                 onKeyDown={(e) => e.key === "Enter" && handleNameSubmit()}
                 placeholder="My Portfolio"
                 autoFocus
-                className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm px-3.5 py-2.5 rounded-lg outline-none placeholder-gray-300 focus:border-brand-400 focus:bg-white transition-colors"
+                className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm px-3.5 py-2.5 rounded-lg outline-none placeholder-gray-600 focus:border-brand-400 focus:bg-white transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-medium text-gray-800 uppercase tracking-wider mb-1.5">
                 URL
               </label>
               <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 focus-within:border-brand-400 focus-within:bg-white transition-colors">
@@ -142,7 +142,7 @@ export default function NewSitePage() {
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
                   placeholder="my-portfolio"
-                  className="flex-1 bg-transparent text-gray-900 text-sm outline-none placeholder-gray-300"
+                  className="flex-1 bg-transparent text-gray-900 text-sm outline-none placeholder-gray-600"
                 />
               </div>
             </div>
