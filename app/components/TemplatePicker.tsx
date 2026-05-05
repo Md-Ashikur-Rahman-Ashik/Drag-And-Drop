@@ -32,14 +32,14 @@ export default function TemplatePicker({
       <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between shrink-0">
         <div>
           <h2 className="text-base font-semibold text-gray-900">{title}</h2>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-xs text-gray-800 mt-0.5">
             Pick a template or start from scratch
           </p>
         </div>
         {onClose && (
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 p-1.5 hover:bg-gray-100 rounded-md transition-colors"
+            className="text-gray-800 hover:text-gray-600 p-1.5 hover:bg-gray-100 rounded-md transition-colors"
           >
             ✕
           </button>
@@ -92,11 +92,11 @@ export default function TemplatePicker({
                   <p className="text-xs font-semibold text-gray-900">
                     {template.name}
                   </p>
-                  <span className="text-[10px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">
+                  <span className="text-[10px] text-gray-800 bg-gray-100 px-1.5 py-0.5 rounded-full">
                     {template.category}
                   </span>
                 </div>
-                <p className="text-[11px] text-gray-400 leading-relaxed">
+                <p className="text-[11px] text-gray-800 leading-relaxed">
                   {template.description}
                 </p>
               </div>
@@ -111,7 +111,7 @@ export default function TemplatePicker({
       </div>
 
       <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-between shrink-0">
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-gray-800">
           {selectedId
             ? `Selected: ${templates.find((t) => t.id === selectedId)?.name}`
             : "No template selected"}
@@ -120,7 +120,7 @@ export default function TemplatePicker({
           {onClose && (
             <button
               onClick={onClose}
-              className="text-gray-500 text-sm px-4 py-2 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
+              className="text-gray-900 text-sm px-4 py-2 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
             >
               Cancel
             </button>
@@ -128,7 +128,7 @@ export default function TemplatePicker({
           <button
             onClick={handleSelect}
             disabled={!selectedId}
-            className="bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors"
+            className="rounded font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 text-white hover:bg-blue-700 text-sm px-3 py-1.5"
           >
             Use template →
           </button>
