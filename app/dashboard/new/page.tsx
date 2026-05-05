@@ -5,7 +5,7 @@ import { createSupabaseBrowser } from "../../lib/supabase-browser";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import TemplatePicker from "../../components/TemplatePicker";
-import { Template } from "../../lib/templates";
+import { prepareTemplateData, Template } from "../../lib/templates";
 
 type Step = "name" | "template";
 
@@ -76,6 +76,8 @@ export default function NewSitePage() {
     }
 
     if (template.id !== "blank") {
+      const preparedData = prepareTemplateData(template.data);
+
       await fetch("/api/pages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -83,7 +85,7 @@ export default function NewSitePage() {
           siteId: site.id,
           title: "Home",
           slug: "home",
-          content: template.data,
+          content: preparedData,
           order_index: 0,
         }),
       });
