@@ -157,7 +157,7 @@ export default function NewSitePage() {
           <button
             onClick={handleNameSubmit}
             disabled={!name || !slug}
-            className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-white text-sm font-medium py-2.5 rounded-lg transition-colors"
+            className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-sm font-medium py-2.5 rounded-lg transition-colors"
           >
             Continue →
           </button>
