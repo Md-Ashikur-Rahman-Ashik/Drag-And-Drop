@@ -32,11 +32,16 @@ export default function NewSitePage() {
     if (!name || !slug) return;
     setError("");
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("sites")
       .select("id")
       .eq("slug", slug)
-      .single();
+      .maybeSingle();
+
+    if (error) {
+      setError("Something went wrong. Please try again.");
+      return;
+    }
 
     if (data) {
       setError("This URL is already taken. Try a different name.");
