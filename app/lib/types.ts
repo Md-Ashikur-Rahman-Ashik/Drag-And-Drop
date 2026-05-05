@@ -10,3 +10,5 @@ export interface Page {
   seo_image?: string;
   order_index: number;
 }
+
+export type { Template } from "./templates"
