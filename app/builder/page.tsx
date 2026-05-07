@@ -11,7 +11,11 @@ import Link from "next/link";
 import BuilderPageManager from "../components/BuilderPageManager";
 import SeoPanel from "../components/SeoPanel";
 
-const emptyData: Data = { content: [], root: {} };
+const emptyData: Data = {
+  content: [],
+  root: { props: {} },
+  zones: {},
+};
 
 export default function BuilderPage() {
   const searchParams = useSearchParams();
@@ -92,6 +96,14 @@ export default function BuilderPage() {
             setCurrentPage(firstPage);
             setTimeout(() => {
               isSwitchingRef.current = false;
+            }, 500);
+
+            setTimeout(() => {
+              isSwitchingRef.current = false;
+              console.log(
+                "Guard OFF - currentDataRef components:",
+                currentDataRef.current.content?.length,
+              );
             }, 500);
           }, 50);
         }
@@ -208,6 +220,9 @@ export default function BuilderPage() {
     );
   }
 
+  {
+    console.log("Puck data prop:", JSON.stringify(pageData, null, 2));
+  }
   return (
     <div className="h-screen overflow-hidden relative">
       {saved && (
@@ -353,9 +368,10 @@ export default function BuilderPage() {
         data={pageData}
         onPublish={handlePublish}
         onChange={(data) => {
-          console.log("onChange:", {
+          console.log("onChange fired:", {
             isSwitching: isSwitchingRef.current,
-            componentCount: data.content?.length,
+            incomingCount: data.content?.length,
+            currentRefCount: currentDataRef.current.content?.length,
           });
           if (!isSwitchingRef.current) {
             currentDataRef.current = data;

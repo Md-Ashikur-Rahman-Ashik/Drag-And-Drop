@@ -11,7 +11,8 @@ export interface Template {
 
 export function prepareTemplateData(data: Data): Data {
   return {
-    ...data,
+    root: { props: {} },
+    zones: {},
     content: data.content.map((component, index) => ({
       ...component,
       id: `${(component as ComponentData).type.toLowerCase()}-${index}-${Date.now()}`,
@@ -26,7 +27,11 @@ export const templates: Template[] = [
     description: "Start from scratch with an empty canvas",
     category: "Basic",
     preview: "⬜",
-    data: { content: [], root: {} },
+    data: {
+      root: { props: {} },
+      zones: {},
+      content: [],
+    },
   },
   {
     id: "landing-page",
@@ -36,6 +41,7 @@ export const templates: Template[] = [
     preview: "🚀",
     data: {
       root: {},
+      zones: {},
       content: [
         {
           type: "Navbar",
@@ -112,6 +118,7 @@ export const templates: Template[] = [
     preview: "🎨",
     data: {
       root: {},
+      zones: {},
       content: [
         {
           type: "Navbar",
@@ -189,6 +196,7 @@ export const templates: Template[] = [
     preview: "💼",
     data: {
       root: {},
+      zones: {},
       content: [
         {
           type: "Navbar",
@@ -268,6 +276,7 @@ export const templates: Template[] = [
     preview: "✍️",
     data: {
       root: {},
+      zones: {},
       content: [
         {
           type: "Navbar",
@@ -344,6 +353,7 @@ export const templates: Template[] = [
     preview: "⏳",
     data: {
       root: {},
+      zones: {},
       content: [
         {
           type: "Hero",

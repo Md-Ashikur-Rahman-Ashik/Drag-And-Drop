@@ -301,32 +301,35 @@ export const puckConfig: Config<{
         ],
         theme: "light",
       },
-      render: ({ brandName, links, theme }: NavbarProps) => (
-        <nav
-          className={`px-8 py-4 flex items-center justify-between ${
-            theme === "dark"
-              ? "bg-gray-900 text-white"
-              : "bg-white text-gray-900 border-b border-gray-100"
-          }`}
-        >
-          <span className="font-bold text-lg">{brandName}</span>
-          <div className="flex items-center gap-6">
-            {links.map((link, i) => (
-              <a
-                key={i}
-                href={link.url}
-                className={`text-sm font-medium transition-colors ${
-                  theme === "dark"
-                    ? "text-gray-300 hover:text-white"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </nav>
-      ),
+      render: ({ brandName, links, theme }: NavbarProps) => {
+        console.log("Navbar render called", { brandName });
+        return (
+          <nav
+            className={`px-8 py-4 flex items-center justify-between ${
+              theme === "dark"
+                ? "bg-gray-900 text-white"
+                : "bg-white text-gray-900 border-b border-gray-100"
+            }`}
+          >
+            <span className="font-bold text-lg">{brandName}</span>
+            <div className="flex items-center gap-6">
+              {links.map((link, i) => (
+                <a
+                  key={i}
+                  href={link.url}
+                  className={`text-sm font-medium transition-colors ${
+                    theme === "dark"
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+        );
+      },
     },
     Footer: {
       fields: {
@@ -346,37 +349,40 @@ export const puckConfig: Config<{
         tagline: "Building the web, one page at a time.",
         theme: "light",
       },
-      render: ({ brandName, tagline, theme }) => (
-        <footer
-          className={`px-8 py-12 ${
-            theme === "dark"
-              ? "bg-gray-900 text-white"
-              : "bg-gray-50 text-gray-900 border-t border-gray-100"
-          }`}
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-              <div>
-                <p className="font-bold text-lg mb-2">{brandName}</p>
+      render: ({ brandName, tagline, theme }) => {
+        console.log("Footer render called", { brandName });
+        return (
+          <footer
+            className={`px-8 py-12 ${
+              theme === "dark"
+                ? "bg-gray-900 text-white"
+                : "bg-gray-50 text-gray-900 border-t border-gray-100"
+            }`}
+          >
+            <div className="max-w-5xl mx-auto">
+              <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+                <div>
+                  <p className="font-bold text-lg mb-2">{brandName}</p>
+                  <p
+                    className={`text-sm max-w-xs ${
+                      theme === "dark" ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                    {tagline}
+                  </p>
+                </div>
                 <p
-                  className={`text-sm max-w-xs ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-500"
+                  className={`text-xs ${
+                    theme === "dark" ? "text-gray-600" : "text-gray-400"
                   }`}
                 >
-                  {tagline}
+                  © {new Date().getFullYear()} {brandName}. All rights reserved.
                 </p>
               </div>
-              <p
-                className={`text-xs ${
-                  theme === "dark" ? "text-gray-600" : "text-gray-400"
-                }`}
-              >
-                © {new Date().getFullYear()} {brandName}. All rights reserved.
-              </p>
             </div>
-          </div>
-        </footer>
-      ),
+          </footer>
+        );
+      },
     },
     HeroSplit: {
       fields: {
