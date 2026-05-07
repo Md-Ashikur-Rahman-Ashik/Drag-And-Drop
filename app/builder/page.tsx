@@ -86,10 +86,6 @@ export default function BuilderPage() {
             : emptyData;
 
           setPageData(firstData);
-          console.log("Setting page data:", {
-            componentCount: firstData.content?.length,
-            components: firstData.content?.map((c: ComponentData) => c.type),
-          });
           currentDataRef.current = firstData;
 
           setTimeout(() => {
@@ -100,10 +96,6 @@ export default function BuilderPage() {
 
             setTimeout(() => {
               isSwitchingRef.current = false;
-              console.log(
-                "Guard OFF - currentDataRef components:",
-                currentDataRef.current.content?.length,
-              );
             }, 500);
           }, 50);
         }
@@ -220,9 +212,6 @@ export default function BuilderPage() {
     );
   }
 
-  {
-    console.log("Puck data prop:", JSON.stringify(pageData, null, 2));
-  }
   return (
     <div className="h-screen overflow-hidden relative">
       {saved && (
@@ -368,10 +357,6 @@ export default function BuilderPage() {
         data={pageData}
         onPublish={handlePublish}
         onChange={(data) => {
-          console.log(
-            "onChange fired - types:",
-            data.content?.map((c: ComponentData) => c.type),
-          );
           if (!isSwitchingRef.current) {
             currentDataRef.current = data;
           }
