@@ -38,11 +38,9 @@ export async function POST(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log("API user:", user?.id);
 
   const body = await request.json();
   const { siteId, title, slug, content, order_index } = body;
-  console.log("Upserting page:", { siteId, title, slug });
 
   if (!siteId || !title || !slug) {
     return NextResponse.json(
@@ -65,8 +63,6 @@ export async function POST(request: NextRequest) {
     )
     .select()
     .single();
-
-  console.log("Upsert result:", { data, error });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
