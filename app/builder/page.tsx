@@ -368,11 +368,10 @@ export default function BuilderPage() {
         data={pageData}
         onPublish={handlePublish}
         onChange={(data) => {
-          console.log("onChange fired:", {
-            isSwitching: isSwitchingRef.current,
-            incomingCount: data.content?.length,
-            currentRefCount: currentDataRef.current.content?.length,
-          });
+          console.log(
+            "onChange fired - types:",
+            data.content?.map((c: ComponentData) => c.type),
+          );
           if (!isSwitchingRef.current) {
             currentDataRef.current = data;
           }

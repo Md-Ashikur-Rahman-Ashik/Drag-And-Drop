@@ -13,10 +13,17 @@ export function prepareTemplateData(data: Data): Data {
   return {
     root: { props: {} },
     zones: {},
-    content: data.content.map((component, index) => ({
-      ...component,
-      id: `${(component as ComponentData).type.toLowerCase()}-${index}-${Date.now()}`,
-    })),
+    content: data.content.map((component, index) => {
+      const comp = component as ComponentData;
+      const id = `${comp.type}-${crypto.randomUUID()}`;
+      return {
+        type: comp.type,
+        props: {
+          ...comp.props,
+          id,
+        },
+      };
+    }),
   };
 }
 
