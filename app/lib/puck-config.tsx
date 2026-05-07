@@ -302,7 +302,6 @@ export const puckConfig: Config<{
         theme: "light",
       },
       render: ({ brandName, links, theme }: NavbarProps) => {
-        console.log("Navbar render called", { brandName });
         return (
           <nav
             className={`px-8 py-4 flex items-center justify-between ${
@@ -350,7 +349,6 @@ export const puckConfig: Config<{
         theme: "light",
       },
       render: ({ brandName, tagline, theme }) => {
-        console.log("Footer render called", { brandName });
         return (
           <footer
             className={`px-8 py-12 ${
